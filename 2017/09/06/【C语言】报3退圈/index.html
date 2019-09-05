@@ -57,31 +57,36 @@
   };
 </script>
 
-  <meta name="description" content="加油!!!!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="XieXinBei&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="用字母初始化  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include &amp;lt;stdio.h&amp;gt;void print(char *a,int n);//打印显示void display">
+<meta name="keywords" content="C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C语言】报3退圈">
+<meta property="og:url" content="http://yoursite.com/2017/09/06/【C语言】报3退圈/index.html">
 <meta property="og:site_name" content="XieXinBei&#39;s Blog">
-<meta property="og:description" content="加油!!!!!">
+<meta property="og:description" content="用字母初始化  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include &amp;lt;stdio.h&amp;gt;void print(char *a,int n);//打印显示void display">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181212231740688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181212232014726.png">
+<meta property="og:updated_time" content="2019-09-05T16:40:59.333Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XieXinBei&#39;s Blog">
-<meta name="twitter:description" content="加油!!!!!">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="【C语言】报3退圈">
+<meta name="twitter:description" content="用字母初始化  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include &amp;lt;stdio.h&amp;gt;void print(char *a,int n);//打印显示void display">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181212231740688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+  <link rel="canonical" href="http://yoursite.com/2017/09/06/【C语言】报3退圈/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>XieXinBei's Blog</title>
+  <title>【C语言】报3退圈 | XieXinBei's Blog</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -261,12 +266,13 @@
 
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/06/【C语言】报3退圈/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -279,9 +285,8 @@
       <meta itemprop="name" content="XieXinBei's Blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2017/09/06/【C语言】报3退圈/" class="post-title-link" itemprop="url">【C语言】报3退圈</a>
+        <h1 class="post-title" itemprop="name headline">【C语言】报3退圈
+
           
         </h1>
 
@@ -312,6 +317,14 @@
             
           
 
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
           
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -344,7 +357,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
+        <ol>
 <li>用字母初始化</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void print(char *a,int n);//打印显示</span><br><span class="line">void display(char *a,int n);//报3退圈</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    printf(&quot;请输入参与游戏的人数：&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line"></span><br><span class="line">    char a[n];//赋值A、B、C...</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=&apos;A&apos;+i;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    char *p=a;</span><br><span class="line">    printf(&quot;参加游戏的选手:\n&quot;);</span><br><span class="line">    print(p,n);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line"></span><br><span class="line">    display(p,n);</span><br><span class="line"></span><br><span class="line">    printf(&quot;最后留下的人是：&quot;);</span><br><span class="line">    print(p,n);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void display(char *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i=1;        //编号</span><br><span class="line">    int count=n;    //当count=1时得结果</span><br><span class="line">    int flag=0;     //循环报数</span><br><span class="line"></span><br><span class="line">    while(count&gt;1)</span><br><span class="line">    &#123;</span><br><span class="line">        if(flag==n)</span><br><span class="line">            &#123;</span><br><span class="line">                flag=0;</span><br><span class="line">               &#125;</span><br><span class="line">        if(a[flag]!=&apos;*&apos;)</span><br><span class="line">            &#123;</span><br><span class="line">                if(i==3)</span><br><span class="line">                &#123;</span><br><span class="line">                    a[flag]=&apos;*&apos;;</span><br><span class="line">                    i=0;</span><br><span class="line">                    count--;</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        flag++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print(char *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(a[i]!=&apos;*&apos;)</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;a[%d]=%c &quot;,i,a[i]);</span><br><span class="line">            printf(&quot;\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -366,31 +379,107 @@
 </ol>
 <p><img src="https://img-blog.csdnimg.cn/20181212232014726.png" alt="结果"></p>
 
-        
-      
     </div>
 	
     
     
     
-      <footer class="post-footer">
-          <div class="post-eof"></div>
+		<div>
+			
+				
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>【C语言】报3退圈</a></p>
+  <p><span>文章作者:</span>谢喵喵</a></p>
+  <p><span>发布时间:</span>2017年09月06日 - 00:35:19</p>
+  <p><span>最后更新:</span>2019年09月06日 - 00:40:59</p>
+  <p><span>原始链接:</span><a href="/2017/09/06/【C语言】报3退圈/" title="【C语言】报3退圈">http://yoursite.com/2017/09/06/【C语言】报3退圈/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2017/09/06/【C语言】报3退圈/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+			
+		</div>
         
+      
+        <div id="reward-container">
+  <div>走过路过不要错过</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="谢喵喵 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="谢喵喵 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/C语言/" rel="tag"><i class="fa fa-tag"></i># C语言</a>
+            
+          </div>
+        
+
+        
+
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
   </div>
-
-  
 
 
           </div>
           
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjI3Ny8yMjc4OA=="></div>
+  </div>
+  
+  
 
         </div>
           
@@ -405,6 +494,11 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc" data-target="post-toc-wrap">
@@ -613,6 +707,19 @@
 
   
 
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 </body>
 </html>
