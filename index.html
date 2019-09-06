@@ -33,7 +33,7 @@
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: true,
     mediumzoom: false,
@@ -267,185 +267,6 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/06/【Linux】vim-gcc-gdb-make/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="谢喵喵">
-      <meta itemprop="description" content="加油!!!!!">
-      <meta itemprop="image" content="/images/头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XieXinBei's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/06/【Linux】vim-gcc-gdb-make/" class="post-title-link" itemprop="url">【Linux】vim/gcc/gdb/make</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-06 01:11:08 / 修改时间：01:21:17" itemprop="dateCreated datePublished" datetime="2019-09-06T01:11:08+08:00">2019-09-06</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>961</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>1 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="嵌入式文本编辑器vim"><a href="#嵌入式文本编辑器vim" class="headerlink" title="嵌入式文本编辑器vim"></a>嵌入式文本编辑器vim</h2><h3 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h3><ol>
-<li>插入模式</li>
-</ol>
-<ul>
-<li>【x】：删除光标“后面”一个字符（我才直到有这个快捷键。。emm是我没有好好听课吧）</li>
-<li>【X】：删除光标“前面”一个字符</li>
-<li>【yw】：光标处到子尾的字符复制到缓冲区</li>
-<li>【u】：回复上一次操作/多按可执行多次回复</li>
-</ul>
-<ol start="2">
-<li>底行模式</li>
-</ol>
-<ul>
-<li>【set nu】：列行号</li>
-<li>【/关键字】：如果第一次找的不是想要的关键字，按n寻找</li>
-<li>【？关键字】：同上</li>
-<li>【noh】：取消高亮（有时候会误操作，这个有可能会常用）</li>
-</ul>
-<h2 id="嵌入式编译器gcc"><a href="#嵌入式编译器gcc" class="headerlink" title="嵌入式编译器gcc"></a>嵌入式编译器gcc</h2><p><img src="./pic/gcc.jpg" alt></p>
-<ol>
-<li>总体选项：</li>
-</ol>
-<ul>
-<li>-c：编译或汇编源文件</li>
-<li>-E：预处理源文件</li>
-<li>-S：编译源文件</li>
-<li>-o file：指明输出名为file</li>
-</ul>
-<ol start="2">
-<li>警告选项：</li>
-</ol>
-<ul>
-<li>-W：屏蔽所有的警告信息</li>
-<li>-Wall：显示所有类型的警告信息</li>
-<li>-Werror：出现任何警告就停止编译</li>
-</ul>
-<ol start="3">
-<li>调试选项：</li>
-</ol>
-<ul>
-<li>-g：产生调试信息（gdb）</li>
-</ul>
-<ol start="4">
-<li>优化选项：</li>
-</ol>
-<ul>
-<li>-o1：优化1</li>
-<li>-o2：优化2（提高目标文件的运行性能）</li>
-<li>-o3：优化3（支持函数集成优化）</li>
-<li>-o0：不优化</li>
-</ul>
-<ol start="5">
-<li>目录选项：</li>
-</ol>
-<ul>
-<li>-I dir：指定头文件搜索目录dir</li>
-<li>-Ldir：指定搜索目录dir</li>
-</ul>
-<ol start="6">
-<li>连接器选项：</li>
-</ol>
-<ul>
-<li>-static：静态链接</li>
-<li>-l库名：链接库文件</li>
-<li>-L dir：指定连接器的搜索目录dir</li>
-<li>-shared：生成共享文件</li>
-</ul>
-<h3 id="预处理（-c-gt-i）"><a href="#预处理（-c-gt-i）" class="headerlink" title="预处理（.c -&gt; .i）"></a>预处理（.c -&gt; .i）</h3><p>gcc在编译时首先把头文件中的内容加载到*.c的首部<br><img src="https://img-blog.csdnimg.cn/20190319103120275.png" alt></p>
-<h3 id="编译（-i-gt-s）"><a href="#编译（-i-gt-s）" class="headerlink" title="编译（.i -&gt; .s）"></a>编译（.i -&gt; .s）</h3><p>编译阶段是整个编译过程中最复杂的一个阶段。编译的三个步骤：</p>
-<ul>
-<li>词法分析（关键字、标识符是否正确）</li>
-<li>语法分析（语句的语法是否正确）</li>
-<li>语义分析（语句的逻辑意义是否正确）<br><img src="https://img-blog.csdnimg.cn/20190319103905748.png" alt></li>
-</ul>
-<h3 id="汇编（-s-gt-o）"><a href="#汇编（-s-gt-o）" class="headerlink" title="汇编（.s -&gt; .o）"></a>汇编（.s -&gt; .o）</h3><p>汇编阶段是把汇编程序翻译成cpu可以识别的二进制文件（即目标文件）</p>
-<blockquote>
-<p>在window系统中目标文件后缀是.obj</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20190319104030788.png" alt></p>
-<h3 id="链接（-o-gt-out）"><a href="#链接（-o-gt-out）" class="headerlink" title="链接（.o -&gt; .out）"></a>链接（.o -&gt; .out）</h3><p>链接阶段是把程序中所有的目标文件和所需的库文件链接在一起，最终生成一个可以直接运行的文件，成为可执行文件<br><img src="https://img-blog.csdnimg.cn/20190319104453909.png" alt></p>
-<h3 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h3><ol>
-<li>a.out</li>
-<li>COFF</li>
-<li>ELF：Linux平台上可执行文件的主流格式</li>
-</ol>
-<h2 id="函数库"><a href="#函数库" class="headerlink" title="函数库"></a>函数库</h2><p>| :—: | :—: | :—: | :—: |<br>| 静态链接 | 编译系统在链接阶段把程序的目标文件和所需的函数库文件连接在一起（可执行文件可以在没有函数库情况下运行） | 产生的可执行文件体积大 | 运行效率高 |<br>| 动态链接 | 在程序运行，需要使用时才链接函数库 | 产生的可执行文件体积小 | 运行效率低一点 |</p>
-
-        
-      
-    </div>
-	
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/05/hexo搭建血泪史/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,6 +372,123 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/09/【Linux】vim-gcc-gdb-make/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谢喵喵">
+      <meta itemprop="description" content="加油!!!!!">
+      <meta itemprop="image" content="/images/头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XieXinBei's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/09/09/【Linux】vim-gcc-gdb-make/" class="post-title-link" itemprop="url">【Linux】vim/gcc/gdb/make</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-09 10:11:08" itemprop="dateCreated datePublished" datetime="2017-09-09T10:11:08+08:00">2017-09-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-06 10:10:05" itemprop="dateModified" datetime="2019-09-06T10:10:05+08:00">2019-09-06</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>961</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="嵌入式文本编辑器vim"><a href="#嵌入式文本编辑器vim" class="headerlink" title="嵌入式文本编辑器vim"></a>嵌入式文本编辑器vim</h2><h3 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h3><ol>
+<li>插入模式</li>
+</ol><ul>
+<li>【x】：删除光标“后面”一个字符（我才直到有这个快捷键。。emm是我没有好好听课吧）</li>
+<li>【X】：删除光标“前面”一个字符</li>
+<li>【yw】：光标处到子尾的字符复制到缓冲区</li>
+<li>【u】：回复上一次操作/多按可执行多次回复</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/09/09/【Linux】vim-gcc-gdb-make/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+	
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/08/【微信小程序】JS-数据绑定/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -629,64 +567,15 @@
 
       
           <h2 id="页面JS文件"><a href="#页面JS文件" class="headerlink" title="页面JS文件"></a>页面JS文件</h2><p>整个页面执行了一个Page（{…}）方法，参数是一个Object对象，用来指定页面的初始数据data，生命周期函数（on+…）的函数，事件处理函数</p>
-<h3 id="页面的生命周期"><a href="#页面的生命周期" class="headerlink" title="页面的生命周期"></a>页面的生命周期</h3><ol>
-<li>加载</li>
-<li>显示</li>
-<li>渲染</li>
-<li>隐藏</li>
-<li>卸载</li>
-</ol>
-<h3 id="MINA框架提供5个生命周期函数来监听这5个特定的生命周期："><a href="#MINA框架提供5个生命周期函数来监听这5个特定的生命周期：" class="headerlink" title="MINA框架提供5个生命周期函数来监听这5个特定的生命周期："></a>MINA框架提供5个生命周期函数来监听这5个特定的生命周期：</h3><ol>
-<li>onLoad：监听页面加载，一个页面只会调用一次</li>
-<li>onReady：监听页面显示，每次打开页面都会调用</li>
-<li>onShow：监听页面初次渲染完成，一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互</li>
-<li>onHide：监听页面隐藏</li>
-<li>onUnload：监听页面卸载</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data:&#123;&#125;,</span><br><span class="line"></span><br><span class="line">  onLoad:function(option)&#123;</span><br><span class="line">    //页面初始化option为页面跳转所带来的参数</span><br><span class="line">    console.log(&quot;onLoad:页面被加载&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  onReady:function()&#123;</span><br><span class="line">    //页面渲染完成</span><br><span class="line">    console.log(&quot;onReady:页面被渲染&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  onShow:function()&#123;</span><br><span class="line">    //页面显示</span><br><span class="line">    console.log(&quot;onShow:页面被显示&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  onHide:function()&#123;</span><br><span class="line">    //页面隐藏</span><br><span class="line">    console.log(&quot;onHide:页面被隐藏&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  onUnload:function()&#123;</span><br><span class="line">    //页面关闭</span><br><span class="line">    console.log(&quot;onUnload:页面被关闭&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20190322174232434.png" alt></p>
-<ul>
-<li><p>一个页面被正常显示，必须经历加载-&gt;显示-&gt;渲染</p>
-</li>
-<li><p>3个小程序特定事件的处理函数</p>
-<ul>
-<li>PullDownRefresh：监听用户下拉动作的事件处理函数</li>
-<li>onReachBottom：页面上拉触底事件的处理函数</li>
-<li>onShareAppMessage：用户点击右上角分享</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2><ul>
-<li>传统网页：首先获取HTML的DOM，对DOM标签进行赋值，从而实现数据的显示。</li>
-<li>小程序：采用数据绑定机制来做数据的初始化和更新。而且完全抛弃了DOM结构，只能用数据绑定来做数据的相关操作</li>
-</ul>
-<ol>
-<li><a href="https://www.cnblogs.com/gxp69/p/7073415.html" target="_blank" rel="noopener">原生js实现数据单向绑定</a></li>
-<li><a href="https://www.cnblogs.com/yuqing-o605/p/6790709.html?utm_source=itdadao&utm_medium=referral" target="_blank" rel="noopener">原生js实现数据双向绑定</a></li>
-<li><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/data.html" target="_blank" rel="noopener">微信小程序数据绑定-官方</a></li>
-<li><a href="https://www.cnblogs.com/JiSight/p/7724859.html" target="_blank" rel="noopener">微信小程序开发学习–页面事件和数据绑定</a></li>
-</ol>
-<ul>
-<li>不同于AngularJS的双向数据绑定，小程序仅实现了单向数据绑定，即仅支持从逻辑层传递到渲染成的数据绑定</li>
-<li>小程序使用Page方法参数里的data变量作为数据绑定的桥梁</li>
-</ul>
-<ol>
-<li>数据绑定</li>
-</ol>
-<ul>
-<li>初始化的数据绑定：数据直接写在Page方法参数的data对象下</li>
-<li>setData方法数据绑定：同数据更新，会引起页面的重新渲染</li>
-</ul>
-<ol start="2">
-<li>初始化数据绑定</li>
-</ol>
-<ul>
-<li>在js的data中定义变量名和译意，在wxml中用双花括号 { { } }写入变量名</li>
-<li>当页面执行了onShow函数后，逻辑层会收到一个通知，随后逻辑层会将该变量名以json的形式发送到view视图层，视图层接收初始化数据后，开始渲染并显示初始化数据，最终将数据呈现在开发者眼前。<br><img src="https://img-blog.csdnimg.cn/20190322180425874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></li>
-</ul>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/09/08/【微信小程序】JS-数据绑定/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -905,13 +794,15 @@
 
 </li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/20181212165134866.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt="结果"></p>
-<ol start="2">
-<li>递归<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int fun(int i);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    int n;</span><br><span class="line">    printf(&quot;请输入N=&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    sum = fun(n);</span><br><span class="line">    printf(&quot;1-%d的递归求和为%d&quot;,n,sum);</span><br><span class="line">&#125;</span><br><span class="line">int fun(int i)</span><br><span class="line">&#123;</span><br><span class="line">    if(i == 1)</span><br><span class="line">    &#123; return 1;&#125;</span><br><span class="line">    else</span><br><span class="line">    &#123; return (i + fun(i-1));&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/09/06/【C语言】1-100求和；1-N求和/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1014,26 +905,16 @@
       
           <ol>
 <li>用字母初始化</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void print(char *a,int n);//打印显示</span><br><span class="line">void display(char *a,int n);//报3退圈</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    printf(&quot;请输入参与游戏的人数：&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line"></span><br><span class="line">    char a[n];//赋值A、B、C...</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=&apos;A&apos;+i;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    char *p=a;</span><br><span class="line">    printf(&quot;参加游戏的选手:\n&quot;);</span><br><span class="line">    print(p,n);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line"></span><br><span class="line">    display(p,n);</span><br><span class="line"></span><br><span class="line">    printf(&quot;最后留下的人是：&quot;);</span><br><span class="line">    print(p,n);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void display(char *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i=1;        //编号</span><br><span class="line">    int count=n;    //当count=1时得结果</span><br><span class="line">    int flag=0;     //循环报数</span><br><span class="line"></span><br><span class="line">    while(count&gt;1)</span><br><span class="line">    &#123;</span><br><span class="line">        if(flag==n)</span><br><span class="line">            &#123;</span><br><span class="line">                flag=0;</span><br><span class="line">               &#125;</span><br><span class="line">        if(a[flag]!=&apos;*&apos;)</span><br><span class="line">            &#123;</span><br><span class="line">                if(i==3)</span><br><span class="line">                &#123;</span><br><span class="line">                    a[flag]=&apos;*&apos;;</span><br><span class="line">                    i=0;</span><br><span class="line">                    count--;</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        flag++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print(char *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(a[i]!=&apos;*&apos;)</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;a[%d]=%c &quot;,i,a[i]);</span><br><span class="line">            printf(&quot;\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/20181212231740688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt="结果"></p>
-<p>注：用<code>*</code>代表已经退圈的人</p>
-<ul>
-<li><p>第一轮：ABC     C报3，C退圈，C=0</p>
-</li>
-<li><p>第二轮：DAB     B报3，B退圈，B=0</p>
-</li>
-<li><p>第三轮：DAD     D报3，D退圈，D=0</p>
-</li>
-</ul>
-<ol start="2">
-<li>用数字初始化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void print(int *a,int n);//打印显示</span><br><span class="line">void display(int *a,int n);//报3退圈</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    printf(&quot;请输入参与游戏的人数：&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);               </span><br><span class="line">    int a[n];//赋值A、B、C...</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=1;                                           </span><br><span class="line">    &#125;</span><br><span class="line">    int *p=a;</span><br><span class="line">    display(p,n);</span><br><span class="line">    printf(&quot;最后留下的人序号是：&quot;);</span><br><span class="line">    print(p,n);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void display(int *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i=1;        //编号</span><br><span class="line">    int count=n;    //当count=1时得结果</span><br><span class="line">    int flag=0;     //循环报数</span><br><span class="line">    while(count&gt;1)</span><br><span class="line">    &#123;</span><br><span class="line">        if(flag==n)</span><br><span class="line">        &#123;</span><br><span class="line">            flag=0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(a[flag])</span><br><span class="line">        &#123;</span><br><span class="line">            if(i==3)</span><br><span class="line">            &#123;</span><br><span class="line">                a[flag]=0;</span><br><span class="line">                i=0;</span><br><span class="line">                count--;</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        flag++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print(int *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;%d\n&quot;,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/20181212232014726.png" alt="结果"></p>
-
+</ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void print(char *a,int n);//打印显示</span><br><span class="line">void display(char *a,int n);//报3退圈</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    printf(&quot;请输入参与游戏的人数：&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line"></span><br><span class="line">    char a[n];//赋值A、B、C...</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=&apos;A&apos;+i;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    char *p=a;</span><br><span class="line">    printf(&quot;参加游戏的选手:\n&quot;);</span><br><span class="line">    print(p,n);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line"></span><br><span class="line">    display(p,n);</span><br><span class="line"></span><br><span class="line">    printf(&quot;最后留下的人是：&quot;);</span><br><span class="line">    print(p,n);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void display(char *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i=1;        //编号</span><br><span class="line">    int count=n;    //当count=1时得结果</span><br><span class="line">    int flag=0;     //循环报数</span><br><span class="line"></span><br><span class="line">    while(count&gt;1)</span><br><span class="line">    &#123;</span><br><span class="line">        if(flag==n)</span><br><span class="line">            &#123;</span><br><span class="line">                flag=0;</span><br><span class="line">               &#125;</span><br><span class="line">        if(a[flag]!=&apos;*&apos;)</span><br><span class="line">            &#123;</span><br><span class="line">                if(i==3)</span><br><span class="line">                &#123;</span><br><span class="line">                    a[flag]=&apos;*&apos;;</span><br><span class="line">                    i=0;</span><br><span class="line">                    count--;</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        flag++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print(char *a,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(a[i]!=&apos;*&apos;)</span><br><span class="line">        &#123;</span><br><span class="line">            printf(&quot;a[%d]=%c &quot;,i,a[i]);</span><br><span class="line">            printf(&quot;\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/09/06/【C语言】报3退圈/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
