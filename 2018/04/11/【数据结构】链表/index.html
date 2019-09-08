@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/龙.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89148872">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】链表">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/【数据结构】链表/index.html">
+<meta property="og:site_name" content="XieXinBei&#39;s Blog">
+<meta property="og:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89148872">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-08T12:08:31.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【数据结构】链表">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89148872">
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/【数据结构】链表/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【数据结构】链表 | XieXinBei's Blog</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XieXinBei's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">8</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">0</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/【数据结构】链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谢喵喵">
+      <meta itemprop="description" content="加油!!!!!">
+      <meta itemprop="image" content="/images/头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XieXinBei's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">【数据结构】链表
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-11 20:05:16" itemprop="dateCreated datePublished" datetime="2018-04-11T20:05:16+08:00">2018-04-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-08 20:08:31" itemprop="dateModified" datetime="2019-09-08T20:08:31+08:00">2019-09-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>5.5k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>5 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> </a> 版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。  本文链接：<a href="https://blog.csdn.net/qq_42417182/article/details/89148872" target="_blank" rel="noopener">https://blog.csdn.net/qq_42417182/article/details/89148872</a>   </p><a id="more"></a>
+<p>   前言：</p>
+<p> 我比较喜欢用“结点”而不是“节点”</p>
+<hr>
+<p>定义链表的<strong>结点结构体：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> //单链表</span><br><span class="line"></span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int num;</span><br><span class="line">    struct node * next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef struct node Node;</span><br><span class="line">typedef Node * Link;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> //双链表</span><br><span class="line"></span><br><span class="line">struct dbnode</span><br><span class="line">&#123;</span><br><span class="line">    int num;</span><br><span class="line">    struct node * next;</span><br><span class="line">    struct node * prior;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef struct dbnode dbNode;</span><br><span class="line">typedef Node * dbLink;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>链表</strong>中<strong>主要</strong>有以下这么几种<strong>操作：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> void init(Link *head); //初始化链表</span><br><span class="line">void display(Link head); //输出链表</span><br><span class="line">void release(Link *head); //释放链表</span><br><span class="line">void destroy(Link head); //清空链表</span><br><span class="line">void create_node(Link *new_node); //结点分配空间</span><br><span class="line">int is_malloc_ok(Link new_node); //结点分配成功</span><br><span class="line"></span><br><span class="line">void insert_head(Link head,Link new_node); //头插入</span><br><span class="line">void insert_tail(Link head,Link new_node); //尾插入</span><br><span class="line">void insert_mid_head(Link head, Link new_node, int num); //在num前插入(没有num则不插入)</span><br><span class="line">void insert_mid_tail(Link head,Link new_node,int num); //在num后插入(没有num则不插入)</span><br><span class="line">void delete(Link head,int num); //删除</span><br></pre></td></tr></table></figure>
+
+<p> 单链表、双链表、循环链表、等等</p>
+<p> 这些都是线性表的链式存储结构，我们在做题目做项目的时候，可以去考虑使用哪一种来解决问题，具体问题具体分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> /********************************</span><br><span class="line">   给结点分配空间</span><br><span class="line">   当分配不成功的时候重新分配</span><br><span class="line">********************************</span><br><span class="line">void create_node(Link *new_node)</span><br><span class="line">&#123;</span><br><span class="line">    do&#123;</span><br><span class="line"></span><br><span class="line">        *new_node = (Link) malloc (sizeof(dblNode));</span><br><span class="line"></span><br><span class="line">    &#125;while(*new_node == NULL);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> /********************************</span><br><span class="line">   判断结点是否分配成功</span><br><span class="line"></span><br><span class="line">   给结点分配空间</span><br><span class="line">   当分配不成功的时候重新分配</span><br><span class="line">*********************************/</span><br><span class="line">#define MALLOC_MAX 10</span><br><span class="line"></span><br><span class="line">int is_malloc_ok(dbLink new_node)</span><br><span class="line">&#123;</span><br><span class="line">    if(NULL == new_node)</span><br><span class="line">    &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void create_node(Link *new_node)</span><br><span class="line">&#123;</span><br><span class="line">    int count = MALLOC_MAX;</span><br><span class="line"></span><br><span class="line">    do</span><br><span class="line">    &#123;</span><br><span class="line">        *new_node = (Link)malloc(sizeof(Node));</span><br><span class="line"></span><br><span class="line">        count--;</span><br><span class="line"></span><br><span class="line">    &#125;while((!is_malloc_ok(*new_node)) &amp;&amp; (count != 0));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> /********************************</span><br><span class="line">   随机给结点赋值</span><br><span class="line">*********************************/</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;time.h&gt;</span><br><span class="line"></span><br><span class="line">void random_link(dbLink head,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line"></span><br><span class="line">    dbLink new_node;</span><br><span class="line"></span><br><span class="line">    for(i = 0;i &lt; n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        create_node(&amp;new_node);</span><br><span class="line"></span><br><span class="line">        new_node-&gt;num = rand() % 100;</span><br><span class="line"></span><br><span class="line">        //insert_head(head,new_node);</span><br><span class="line">        insert_tail(head,new_node);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>单向链表</strong></p>
+<p> 单向链表仅包含两个域（数据域和指针域）</p>
+<p> 数据域存储结点的数据</p>
+<p> 指针域指向表中的下一个结点，而最后一个节点则指向NULL</p>
+<p> <strong>适用于简单操作，或者增加和删除操作比较多的具体应用中</strong></p>
+<p> 单向链表只可向一个方向遍历。查找一个结点的时候需要从从第一个结点依次遍历，直到访问到需要的位置。（不一定似的从第一个结点，看程序员自己的想法）</p>
+<p> <strong>带头结点的单链表比较常用</strong></p>
+<p> <strong>双向链表</strong><br> 双向链表包含（一个数据域和两个指针域）</p>
+<p> 头结点的prior指向NULL，尾结点的next指向NULL。</p>
+<p> 这样可以从任何一个结点访问其前驱结点、后继结点，以至整个链表。</p>
+<p> <strong>适用于需要大批量数据查询的具体应用中</strong></p>
+<p> <strong>由于占用额外的空间以存储指针，若是用来实现简单操作，可能会浪费空间，因为单链表即可解决这些问题。</strong></p>
+<p> <strong>循环的双向链表比较常用</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"> //带头结点的双链表</span><br><span class="line"></span><br><span class="line">/***********************************************</span><br><span class="line">   头插</span><br><span class="line">************************************************/</span><br><span class="line">void insert_head(dbLink head,dbLink new_node)</span><br><span class="line">&#123;</span><br><span class="line">    new_node-&gt;next = head-&gt;next;</span><br><span class="line"></span><br><span class="line">    new_node-&gt;prior = head;</span><br><span class="line"></span><br><span class="line">    head-&gt;next = new_node;</span><br><span class="line"></span><br><span class="line">    if(new_node-&gt;next != NULL)</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">	    new_node-&gt;next-&gt;prior = new_node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/***********************************************</span><br><span class="line">   尾插</span><br><span class="line">************************************************/</span><br><span class="line">void insert_tail(dbLink head,dbLink new_node)</span><br><span class="line">&#123;</span><br><span class="line">	dbLink p = head;</span><br><span class="line"></span><br><span class="line">	while(p-&gt;next != NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	new_node-&gt;next = p-&gt;next;</span><br><span class="line"></span><br><span class="line">	new_node-&gt;prior = p;</span><br><span class="line"></span><br><span class="line">	p-&gt;next = new_node;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/***********************************************</span><br><span class="line">   删除</span><br><span class="line">************************************************/</span><br><span class="line">void delete(dbLink head,int num )</span><br><span class="line">&#123;</span><br><span class="line">    dbLink p = head-&gt;next;</span><br><span class="line"></span><br><span class="line">    while(p != NULL &amp;&amp; p-&gt;num != num)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(p != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        p-&gt;prior-&gt;next = p-&gt;next ;</span><br><span class="line"></span><br><span class="line">		if(p-&gt;next != NULL)</span><br><span class="line">		&#123;</span><br><span class="line">        	p-&gt;next-&gt;prior = p-&gt;prior;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        free(p);</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;找不到该结点，无法执行删除！\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>循环链表</strong></p>
+<p> 循环链表的结构体与单链表、双链表相同</p>
+<p> 唯一的不同点是：单链表的尾结点next指针域指向链表头；双链表的头结点prior指向尾结点，尾结点的next指向头</p>
+<p> <strong>使用带头结点的循环单链表实现插入和删除操作时，算法实现较为方便</strong></p>
+<p> <strong>只要知道表中任何一个结点的地址，就可以遍历链表中任意结点</strong></p>
+<p> <strong>适用于需要进行大量增加、删除元素操作而对访问元素无要求的，及预先无法确定表的大小的具体问题</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> //循环双链表</span><br><span class="line"></span><br><span class="line">/***********************************************</span><br><span class="line">   头插</span><br><span class="line">************************************************/</span><br><span class="line">void insert_head(dbLink head,dbLink new_node)</span><br><span class="line">&#123;</span><br><span class="line">    new_node-&gt;next = head-&gt;next;</span><br><span class="line"></span><br><span class="line">    new_node-&gt;prior = head;</span><br><span class="line"></span><br><span class="line">    head-&gt;next = new_node;</span><br><span class="line"></span><br><span class="line">	new_node-&gt;next-&gt;prior = new_node;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/***********************************************</span><br><span class="line">   尾插</span><br><span class="line">************************************************/</span><br><span class="line">void insert_tail(dbLink head,dbLink new_node)</span><br><span class="line">&#123;</span><br><span class="line">    //head-&gt;prior = new_node;</span><br><span class="line"></span><br><span class="line">    new_node-&gt;prior = head-&gt;prior;</span><br><span class="line"></span><br><span class="line">    //head-&gt;next = new_node;</span><br><span class="line">    head-&gt;prior-&gt;next = new_node;</span><br><span class="line"></span><br><span class="line">    head-&gt;prior = new_node;</span><br><span class="line"></span><br><span class="line">    new_node-&gt;next = head;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/***********************************************</span><br><span class="line">   删除</span><br><span class="line">************************************************/</span><br></pre></td></tr></table></figure>
+
+<p> 相关题目：（没来得及写）</p>
+<ol>
+<li>题目：利用链表实现一个先入后出的栈结构,并提供栈操作的push和pop的接口</li>
+<li>题目：使用双向链表来实现双向队列，并且让队列具有以下的操作：（1）判断队列是否为空（2）得到双向队列中元素的个数（3）向左端添加一个新元素（4）向右端添加一个新元素（5）从左端删除一个元素（6）从右端删除一个元素</li>
+<li><a href="https://blog.csdn.net/qq_42417182/article/details/89218973" target="_blank" rel="noopener">排序链表（按大小插入）</a></li>
+<li><a href="https://blog.csdn.net/qq_42417182/article/details/89218973" target="_blank" rel="noopener">排序链表（插入后排序）</a></li>
+<li><a href="https://blog.csdn.net/qq_42417182/article/details/89218973" target="_blank" rel="noopener">反转单向和双向链表</a></li>
+<li>反转部分单向链表</li>
+<li>环形单链表的约瑟夫问题</li>
+<li>程序功能：建立一个带有头结点的单向链表，并将存储在数组中的字符依次转储到链表的各个结点中。</li>
+<li>编写程序STUDENT * Create(STUDENT studs[],int n)。STUDENT是一个结构类型，包含姓名、成绩和指针域。studs数组中存储了n个STUDENT记录。create函数的功能是根据studs数组建立一个链表，链表中结点按成绩降序排列，函数返回链表头指针。</li>
+<li>打印两个有序链表的公共部分</li>
+<li>在单链表和双链表中删除倒数第K个结点</li>
+<li>删除链表的中间结点和a/b处的结点</li>
+<li>判断一个链表是否为回文结构</li>
+<li>将单向链表按某值划分成左边小、中间相等、右边大的形式</li>
+<li>赋值含有随机指针结点的链表</li>
+<li>两个单链表生成相加链表</li>
+<li>两个单链表相交的一系列问题</li>
+<li>将单链表的每K结点之间逆序</li>
+<li>删除无序单链表中值重复出现的结点</li>
+<li>将搜索二叉树转换成双向链表</li>
+<li>单链表的选择排序</li>
+<li>一种怪异的结点删除方式</li>
+<li>向有序的环形单链表中插入新结点</li>
+<li>合并两个有序的单链表</li>
+<li>按照左右半区的方式重新组合单链表</li>
+</ol>
+
+    </div>
+	
+    
+    
+    
+		<div>
+			
+				
+			
+		</div>
+        
+      
+        <div id="reward-container">
+  <div>走过路过不要错过</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="谢喵喵 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="谢喵喵 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/CSDN迁移/" rel="tag"><i class="fa fa-tag"></i># CSDN迁移</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/04/09/【网络】网络知识点/" rel="next" title="【网络】网络知识点">
+                  <i class="fa fa-chevron-left"></i> 【网络】网络知识点
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/04/28/【OpenCV】VS2013 + CMake环境配置/" rel="prev" title="【OpenCV】VS2013 + CMake环境配置">
+                  【OpenCV】VS2013 + CMake环境配置 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjI3Ny8yMjc4OA=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/头像.png"
+      alt="谢喵喵">
+  <p class="site-author-name" itemprop="name">谢喵喵</p>
+  <div class="site-description" itemprop="description">加油!!!!!</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Artist-V" title="GitHub &rarr; https://github.com/Artist-V" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/1642352595" title="Weibo &rarr; https://weibo.com/1642352595" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https://www.baidu.com/" rel="noopener" target="_blank">百度一下</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谢喵喵</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">98k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:29</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

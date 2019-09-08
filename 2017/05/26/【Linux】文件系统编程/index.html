@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/龙.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/88759420">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Linux】文件系统编程">
+<meta property="og:url" content="http://yoursite.com/2017/05/26/【Linux】文件系统编程/index.html">
+<meta property="og:site_name" content="XieXinBei&#39;s Blog">
+<meta property="og:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/88759420">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526174536313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526175326798.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190526181737505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-08T12:08:08.508Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Linux】文件系统编程">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/88759420">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190526174536313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+  <link rel="canonical" href="http://yoursite.com/2017/05/26/【Linux】文件系统编程/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【Linux】文件系统编程 | XieXinBei's Blog</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XieXinBei's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">8</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">0</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/26/【Linux】文件系统编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谢喵喵">
+      <meta itemprop="description" content="加油!!!!!">
+      <meta itemprop="image" content="/images/头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XieXinBei's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">【Linux】文件系统编程
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-26 18:42:47" itemprop="dateCreated datePublished" datetime="2017-05-26T18:42:47+08:00">2017-05-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-08 20:08:08" itemprop="dateModified" datetime="2019-09-08T20:08:08+08:00">2019-09-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>4.3k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>4 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> </a> 版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。  本文链接：<a href="https://blog.csdn.net/qq_42417182/article/details/88759420" target="_blank" rel="noopener">https://blog.csdn.net/qq_42417182/article/details/88759420</a>   </p><a id="more"></a>
+<p>   <a href="#1%E3%80%81errno">1、errno</a></p>
+<p> <a href="#%E6%96%87%E4%BB%B6">文件</a></p>
+<p> <a href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B">常见的文件类型</a></p>
+<p> <a href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6">文件描述符</a></p>
+<p> <a href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%9A%84%E4%B8%80%E8%88%AC%E8%BF%87%E7%A8%8B">文件操作的一般过程</a></p>
+<p> <a href="#1%E3%80%81open()%3A%E6%89%93%E5%BC%80%E6%88%96%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">1、open():打开或创建一个文件</a></p>
+<p> <a href="#3%E3%80%81write()%EF%BC%9A%E5%86%99%E6%96%87%E4%BB%B6">3、write()：写文件</a></p>
+<p> <a href="#4%E3%80%81read()%EF%BC%9A%E8%AF%BB%E6%96%87%E4%BB%B6">4、read()：读文件</a></p>
+<p> <a href="#5%E3%80%81lseek()%EF%BC%9A%E6%96%87%E4%BB%B6%E5%81%8F%E7%A7%BB">5、lseek()：文件偏移</a></p>
+<hr>
+<p> 几乎所有的系统调用或库函数都会返回某种类型的状态值，以表明是否执行成功</p>
+<p> 当系统调用执行失败，会设置全局整型变量errno的值，以表明具体的出错原因</p>
+<p> 如果遇到一个函数不会用，可以用man命令查看其解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man errno</span><br></pre></td></tr></table></figure>
+
+<h1 id="1、errno"><a href="#1、errno" class="headerlink" title="1、errno"></a>1、errno</h1><p> 头文件：errno.h</p>
+<p> errno是一个整型值，所以可以使用别的方法基于errno的值，直接显示相应的错误消息</p>
+<p> <strong>（1）perror</strong></p>
+<p> 头文件：stdio.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void perror(const char *msg);</span><br></pre></td></tr></table></figure>
+
+<p> <strong>（2）strerror</strong></p>
+<p> 头文件：string.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char *strerror(int errnum);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>笔者有话说：我觉得直接用perror就可以了，用errno也看不出是什么错，还要对住表查。嘻嘻(●’◡’●)</li>
+</ul>
+<hr>
+<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><ul>
+<li>系统资源(内存、硬盘、一般设备、进程间通信的通道等)的一个抽象  </li>
+<li>对系统资源进行访问的一个通用接口。<h1 id="常见的文件类型"><a href="#常见的文件类型" class="headerlink" title="常见的文件类型"></a>常见的文件类型</h1></li>
+</ul>
+<ul>
+<li>_ 普通文件_：数据存储在磁盘中，可以随机访问文件的内容。Linux系统中的文件是面向字节的，文件的内容以字节为单位进行存储和访问。</li>
+<li>_ 目录_：目录是一种特殊的文件。</li>
+<li>_ 管道文件_：管道是Linux中的一种进程间通信的机制。</li>
+<li>_ 设备文件_：设备文件没有具体的内容，对设备文件的读写操作实际上与某个设备的输入输出操作关联在一起</li>
+<li>_ 符号链接_：符号链接的内容是指向另一个文件的路径。当对符号链接进行操作时，系统会根据情况将这个操作转移到它所指向的文件上去，而不是对它本身进行操作。</li>
+<li>_ socket_： socket也是一种进程间通信的方式，与管道不同的是，它们可以在不同的主机上进行通信，也就是网络通信。<h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1></li>
+</ul>
+<ul>
+<li>所有执行I/O操作的系统调用使用文件描述符来表示打开的文件。  </li>
+<li>文件描述符是一个非负整数。  </li>
+<li>文件描述符可以表示各种类型的打开的文件。  </li>
+<li>对文件的操作只要使用文件描述符即可指定所操作的文件。<h1 id="文件操作的一般过程"><a href="#文件操作的一般过程" class="headerlink" title="文件操作的一般过程"></a>文件操作的一般过程</h1></li>
+</ul>
+<ul>
+<li>打开文件：打开文件成功后，应用程序将获得文件描述符。</li>
+<li>读写操作：应用程序使用文件描述符对文件进行读写等操作。  </li>
+<li>关闭文件：全部操作完毕后，应用程序需要将文件关闭以释放用于管理打开文件的内存。</li>
+</ul>
+<h1 id="1、open-打开或创建一个文件"><a href="#1、open-打开或创建一个文件" class="headerlink" title="1、open():打开或创建一个文件"></a>1、open():打开或创建一个文件</h1><p> 头文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> int open(const char *pathname, int flags);</span><br><span class="line">int open(const char *pathname, int flags, mode_t mode);</span><br></pre></td></tr></table></figure>
+
+<p> 各参数及返回值的含义如下：</p>
+<ul>
+<li>pathname：要打开或创建的文件名称。  </li>
+<li>flags：标志位，指定打开文件的操作方式。  </li>
+<li>mode：指定新文件的访问权限。(仅当创建新文件时才使用该参数)</li>
+<li>返回值：若成功返回文件描述符，否则返回-1并设置变量errno的值。 （1）flags：</li>
+</ul>
+<ul>
+<li>O_RDONLY：只读</li>
+<li>O_WRONLY：只写</li>
+<li>O_RDWR：读写 * 注意：上述三个常量必须指定且只能指定一个。</li>
+</ul>
+<ul>
+<li>O_CREAT：文件不存在则创建  </li>
+<li>O_EXCL：O_CREAT标志已经使用，那么当由pathname参数指定的文件已经存在时，open返回失败。</li>
+<li>O_TRUNC：被打开的文件存在并且是以可写的方式打开的，则清空文件原有的内容。  </li>
+<li>O_APPEND：新写入的内容将被附加在文件原来的内容之后（打开后文件的读写位置被置于文件尾）。 * 注意：上述值仅为可选取值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例子 ：O_CREAT | O_RDWR |O_APPEND</span><br></pre></td></tr></table></figure>
+
+<p> （2）mode：</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190526174536313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int fd;</span><br><span class="line"></span><br><span class="line">    fd = open(&quot;./text.txt&quot;,O_CREAT | O_RDWR |O_APPEND);</span><br><span class="line">    if(fd == -1)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;open &quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdnimg.cn/20190526175326798.png" alt></p>
+<p> 2、close()：关闭文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int close(int fd);</span><br></pre></td></tr></table></figure>
+
+<p> 各参数及返回值的含义如下：</p>
+<ul>
+<li>fd：要关闭的文件的描述符。</li>
+<li>返回值：若成功返回0，出错则返回-1。 * 注意：当一个进程终止时，内核会自动关闭它所有打开的文件。</li>
+</ul>
+<h1 id="3、write-：写文件"><a href="#3、write-：写文件" class="headerlink" title="3、write()：写文件"></a>3、write()：写文件</h1><p> 头文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssize_t write(int fd, const void *buf, size_t count);</span><br></pre></td></tr></table></figure>
+
+<p> 各参数及返回值的含义如下：</p>
+<ul>
+<li><p>fd：要写入的文件的描述符。</p>
+</li>
+<li><p>buf：要写入的数据所存放的缓冲区。  </p>
+</li>
+<li><p>count：要写入的字节数。  </p>
+</li>
+<li><p>返回值：若成功返回已写的字节数，出错则返回-1并设置变量errno的值。 * 注意1：size_t是无符号整型，ssize_t是有符号整型</p>
+<ul>
+<li>注意2：buf指向的内存空间必须事先分配好</li>
+</ul>
+</li>
+</ul>
+<h1 id="4、read-：读文件"><a href="#4、read-：读文件" class="headerlink" title="4、read()：读文件"></a>4、read()：读文件</h1><p> 头文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssize_t read(int fd, void *buf, size_t count);</span><br></pre></td></tr></table></figure>
+
+<p> 各参数及返回值的含义如下：</p>
+<ul>
+<li>fd：要读取的文件的描述符。  </li>
+<li>buf：读取到的数据要放入的缓冲区。  </li>
+<li>count：要读取的字节数。</li>
+<li>返回值：若成功返回读到的字节数，若已到文件结尾则返回0，若出错则返回-1并设置变量errno的值。 * 笔者有话说：我觉得读read()和写write()蛮像的，就是用法不一样而已(●’◡’●)</li>
+</ul>
+<h1 id="5、lseek-：文件偏移"><a href="#5、lseek-：文件偏移" class="headerlink" title="5、lseek()：文件偏移"></a>5、lseek()：文件偏移</h1><p> 头文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">off_t lseek(int fildes, off_t offset, int whence);</span><br></pre></td></tr></table></figure>
+
+<p> 各参数及返回值的含义如下：</p>
+<ul>
+<li>filder：文件的描述符。</li>
+<li>offset：offset个字节（可正可负）</li>
+<li>whence：文件偏移量设置方式吧</li>
+<li>返回值：若成功偏移则返回new file offset，若出错则返回-1并设置变量errno的值。 （1）whence：</li>
+</ul>
+<ul>
+<li><p>SEEK_SET：将文件偏移量设置在距文件开始处offset个字节。 （文件头：0，SEEK_SET）</p>
+</li>
+<li><p>SEEK_CUR：将文件偏移量设置在其当前值加offset个字节。  </p>
+</li>
+<li><p>SEEK_END：将文件偏移量设置为文件长度加offset个字节。（文件尾：0，SEEK_END）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int fd;</span><br><span class="line">	char buff1[100] = &#123;0&#125;;</span><br><span class="line">	char buff2[100] = &#123;0&#125;;</span><br><span class="line">	int ret;</span><br><span class="line"></span><br><span class="line">	fd = open(&quot;./text.txt&quot;,O_CREAT | O_RDWR |O_APPEND);</span><br><span class="line">	if(fd == -1)</span><br><span class="line">	&#123;</span><br><span class="line">		perror(&quot;open &quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	//文件写入</span><br><span class="line">	printf(&quot;please input string:&quot;);</span><br><span class="line">	gets(buff1);</span><br><span class="line"></span><br><span class="line">	ret = write(fd,buff1,strlen(buff1));</span><br><span class="line">	if(ret == -1)</span><br><span class="line">	&#123;</span><br><span class="line">	   perror(&quot;write &quot;);</span><br><span class="line">	   return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//偏移</span><br><span class="line">	ret = lseek(fd,0,SEEK_SET);</span><br><span class="line">	if(ret == -1)</span><br><span class="line">	&#123;</span><br><span class="line">		perror(&quot;lseek &quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	//文件读取</span><br><span class="line">	ret = read(fd,buff2,sizeof(buff2));</span><br><span class="line">	if(ret == -1)</span><br><span class="line">	&#123;</span><br><span class="line">	   perror(&quot;read &quot;);</span><br><span class="line">	   return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;read success : %s \nread bytes %d\n&quot;,buff2,ret);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190526181737505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<ul>
+<li>笔者有话说：在写入的时候使用strlen(buff)，因为buff一共分配了100个字节，但是buff我是用键盘输入的，所以它不一定实际上有100个字节，用sizeof(buff)的话写入文件中的就是满满100个字节，其他你没有键盘写入的被自动填充值（因为我赋了初值所以可能是0，如果没有初值可能是随机值吧?），所以我写入的是实际字节数。读取的时候可以随意啦，因为你不知道文件中有多少个字节，所以读取的时候可以用sizeof(buff)，且返回值ret可以知道最终读取的实际字节数。</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+    </div>
+	
+    
+    
+    
+		<div>
+			
+				
+			
+		</div>
+        
+      
+        <div id="reward-container">
+  <div>走过路过不要错过</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="谢喵喵 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="谢喵喵 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/CSDN迁移/" rel="tag"><i class="fa fa-tag"></i># CSDN迁移</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/04/04/【Linux C】九数组分数/" rel="next" title="【Linux C】九数组分数">
+                  <i class="fa fa-chevron-left"></i> 【Linux C】九数组分数
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2017/07/11/【Linux C】字符串编程练习/" rel="prev" title="【Linux C】字符串编程练习">
+                  【Linux C】字符串编程练习 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjI3Ny8yMjc4OA=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、errno"><span class="nav-number">1.</span> <span class="nav-text">1、errno</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件"><span class="nav-number">2.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的文件类型"><span class="nav-number">3.</span> <span class="nav-text">常见的文件类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件描述符"><span class="nav-number">4.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件操作的一般过程"><span class="nav-number">5.</span> <span class="nav-text">文件操作的一般过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1、open-打开或创建一个文件"><span class="nav-number">6.</span> <span class="nav-text">1、open():打开或创建一个文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、write-：写文件"><span class="nav-number">7.</span> <span class="nav-text">3、write()：写文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、read-：读文件"><span class="nav-number">8.</span> <span class="nav-text">4、read()：读文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、lseek-：文件偏移"><span class="nav-number">9.</span> <span class="nav-text">5、lseek()：文件偏移</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/头像.png"
+      alt="谢喵喵">
+  <p class="site-author-name" itemprop="name">谢喵喵</p>
+  <div class="site-description" itemprop="description">加油!!!!!</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Artist-V" title="GitHub &rarr; https://github.com/Artist-V" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/1642352595" title="Weibo &rarr; https://weibo.com/1642352595" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https://www.baidu.com/" rel="noopener" target="_blank">百度一下</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谢喵喵</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">98k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:29</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/龙.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/95483669">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Linux C】字符串编程练习">
+<meta property="og:url" content="http://yoursite.com/2017/07/11/【Linux C】字符串编程练习/index.html">
+<meta property="og:site_name" content="XieXinBei&#39;s Blog">
+<meta property="og:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/95483669">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190711154307999.png">
+<meta property="og:updated_time" content="2019-09-08T12:07:22.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Linux C】字符串编程练习">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/95483669">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190711154307999.png">
+  <link rel="canonical" href="http://yoursite.com/2017/07/11/【Linux C】字符串编程练习/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【Linux C】字符串编程练习 | XieXinBei's Blog</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XieXinBei's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">8</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">0</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/【Linux C】字符串编程练习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谢喵喵">
+      <meta itemprop="description" content="加油!!!!!">
+      <meta itemprop="image" content="/images/头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XieXinBei's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">【Linux C】字符串编程练习
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-07-11 19:27:46" itemprop="dateCreated datePublished" datetime="2017-07-11T19:27:46+08:00">2017-07-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-08 20:07:22" itemprop="dateModified" datetime="2019-09-08T20:07:22+08:00">2019-09-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>5.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>5 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> </a> 版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。  本文链接：<a href="https://blog.csdn.net/qq_42417182/article/details/95483669" target="_blank" rel="noopener">https://blog.csdn.net/qq_42417182/article/details/95483669</a>   </p><a id="more"></a>
+<p>   <strong><strong>通过编程，实现strlen、strcmp、strcpy、strcnpy、strcat、strstr、strchr等字符串处理函数，和atoi函数</strong></strong></p>
+<hr>
+<p> （1）strlen函数：int mystrlen(char * s)</p>
+<p> 功能：计算字符串s的长度、返回s的长度，不包括结束符’\0’。</p>
+<blockquote>
+<p>思路：遍历字符串直到结束符为止，定义一个int型变量记录字符串长度</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> int mystrlen(const char *s)</span><br><span class="line">&#123;</span><br><span class="line">	int count = 0;</span><br><span class="line"></span><br><span class="line">	while(*s++) //先取后+</span><br><span class="line">	&#123;</span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line">	return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdnimg.cn/20190711154307999.png" alt></p>
+<hr>
+<p> （2）strcmp函数：int mystrcmp(const char * str1,const char * str2)</p>
+<p> 功能：比较字符串s1和s2：(1)当s1&lt;s2时，返回为负数；(2)当s1==s2时，返回值= 0；(3)当s1&gt;s2时，返回正数。</p>
+<blockquote>
+<p>思路：遍历字符串s1和s2，当某串结束或不相等时跳出循环，返回字符的差值。（当两串相等时差值也是为0）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> int mystrcmp(const char *s1,const char *s2)</span><br><span class="line">&#123;</span><br><span class="line">	while( ((*s1 != &apos;\0&apos;)||(*s2 != &apos;\0&apos;)) &amp;&amp; (*s1 == *s2))</span><br><span class="line">	&#123;</span><br><span class="line">		s1++;</span><br><span class="line">		s2++;</span><br><span class="line">	&#125;</span><br><span class="line">        return *s1 - *s2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>过程中发生的小错误：</p>
+<p> 没有判断字符串为空了的情况，导致相等的情况下s1++,s2++后回到循环判断条件中取地址，显示段错误</p>
+</blockquote>
+<hr>
+<p> （3）strcpy函数：char * mystrcpy(char * dest, const char * src)</p>
+<p> 功能：把从src地址开始且含有NULL结束符的字符串复制到以dest开始的地址空间，返回指向dest的指针。</p>
+<blockquote>
+<p>思路：定义一个char<em>的指针ret指向dest的首地址，while循环从</em>ret值不为’\0’为止，依次把src的字符赋给ret（包括’\0’）</p>
+<p> 所有操作用局部变量ret来实现，操作结果是dest的首地址不变而地址指向的值改变了，返回的是dest的首地址而不是局部变量ret。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> char *mystrcpy(char* dest, const char *src)</span><br><span class="line">&#123;</span><br><span class="line">    char *ret = dest;</span><br><span class="line"></span><br><span class="line">    while(*ret++ = *src++)</span><br><span class="line">    &#123;;&#125;</span><br><span class="line"></span><br><span class="line">    return dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p> （4）strncpy函数：extern char * mystrncpy(char * dest, char * src, int n)</p>
+<p> 功能：把src所指由NULL结束的字符串的前n个字节复制到dest所指的数组中、返回指向dest的指针。如果src的长度小于n个字节，则以NULL填充dest直到复制完n个字节。</p>
+<blockquote>
+<p>思路：与<strong><strong>mystrcpy</strong></strong>的思路相近。定义一个char<em>的指针ret指向dest的首地址，循环while当n等于0时结束，若src已到尾而n还未置零时，</em> ret = NULL</p>
+<p> 所有操作用局部变量ret来实现，操作结果是dest的首地址不变而地址指向的值改变了，返回的是dest的首地址而不是局部变量ret。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> extern char *mystrncpy(char *dest, const char *src, int n)</span><br><span class="line">&#123;</span><br><span class="line">    char *ret = dest;</span><br><span class="line"></span><br><span class="line">    while(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        if(*src == &apos;\0&apos;)</span><br><span class="line">        &#123;</span><br><span class="line">            *ret = &apos;\0&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            *ret = *src;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>过程中发生的小错误</p>
+<p> dest中传进来的参数不能是char * s = “”，因为字符串常量中有\0，第一步取地址的时候就会显示段错误；</p>
+</blockquote>
+<hr>
+<p> （5）strcat函数：char * mystrcat(char * dest,char * src)</p>
+<p> 功能：把src所指字符串添加到dest结尾处(覆盖dest结尾处的’\0’)并添加’\0’、返回指向dest的指针。</p>
+<blockquote>
+<p>思路：定义一个char*的指针ret指向dest的首地址，先遍历src直到结尾，再while循环ret从头到遇到’\0’为止，依次赋值</p>
+<p> 所有操作用局部变量ret来实现，操作结果是dest的首地址不变而地址指向的值改变了，返回的是dest的首地址而不是局部变量ret。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> char *mystrcat(char *dest, const char *src)</span><br><span class="line">&#123;</span><br><span class="line">    char *ret = dest;</span><br><span class="line"></span><br><span class="line">    while(*ret)</span><br><span class="line">    &#123;</span><br><span class="line">        ret++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while(*ret++ = *src++)</span><br><span class="line">    &#123;;&#125;</span><br><span class="line"></span><br><span class="line">    return dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>过程中发生的小错误：</p>
+<p> 在写第一个循环遍历ret的时候，图省事写的判断条件是 * ret++，当遍历结束的时候*ret位于’\0’字符串结束符之后，后面再进行赋值操作时复制后的字符都显示不出来，因为输出的是到第一个’\0’为止</p>
+<p> 即 ：hello’\0’world’\0’</p>
+</blockquote>
+<hr>
+<p> （6）strstr函数：char * mystrstr(const char * s1, const char * s2)</p>
+<p> 功能：实现从字符串str1中查找是否有字符串str2，如果有，从str1中的str2位置起，返回str1中str2起始位置的指针，如果没有，返回null。</p>
+<blockquote>
+<p>思路：定义三个char<em>的指针，start指向s1的首地址，p2指向s2的首地址，p1先赋初值为NULL；当s2为空的时候不必判断（没有空判断的话，到下面的if时会判断条件成功，返回start值）；while循环start（即循环s1），在比较前给p1和p2重新赋值，然后比较</em>p1和*p2是否相等，相等的话就p1++，p2++，其他情况跳出循环；循环结束之后判断s2是否为空，若为空则代表s2搜索成功，返回串首地址start</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> char* mystrstr(const char* s1, const char* s2)</span><br><span class="line">&#123;</span><br><span class="line">    char *start = (char *)s1;</span><br><span class="line">    char *p1 = NULL;</span><br><span class="line">    char *p2 = (char *)s2;</span><br><span class="line"></span><br><span class="line">    if(*s2 == &apos;\0&apos;)</span><br><span class="line">    &#123;</span><br><span class="line">        return nullptr;</span><br><span class="line">    &#125;</span><br><span class="line">    while(*start)</span><br><span class="line">    &#123;</span><br><span class="line">        p1 = start;</span><br><span class="line">        p2 = (char *)s2;</span><br><span class="line">        while((*p1 != &apos;\0&apos;) &amp;&amp; (*p2 != &apos;\0&apos;) &amp;&amp; (*p1 == *p2))</span><br><span class="line">        &#123;</span><br><span class="line">            p1++;</span><br><span class="line">            p2++;</span><br><span class="line">        &#125;   </span><br><span class="line">        if(*p2 == &apos;\0&apos;)</span><br><span class="line">        &#123;</span><br><span class="line">            return start;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nullptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>过程中发生的小问题：</p>
+<p> 假如串s1为”hello” ，s2为”ell”时，可以搜索到子串，但是输出的结果为”ello”，因为给的只是首地址，他会遍历到’\0’为止</p>
+<p> 应该在s2结束了的地方赋值’\0’，但我不知道怎么改</p>
+</blockquote>
+<hr>
+<p> （7）strchr函数：extern char * mystrchr(const char * s1, const char * s2)</p>
+<p> 功能：查找字符串s中首次出现字符c的位置、返回首次出现c的位置的指针，如果s中不存在c则返回NULL。</p>
+<blockquote>
+<p>思路：定义一个char<em>的指针ret指向dest的首地址，while循环当</em>ret不为’\0’且等于c的时候ret++，当循环结束*ret为’\0’时返回NULL</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> extern char *mystrchr(const char *s,char c)</span><br><span class="line">&#123;</span><br><span class="line">    char *ret = (char *)s;</span><br><span class="line">    while((*ret != &apos;\0&apos;) &amp;&amp; (*ret != c))</span><br><span class="line">    &#123;</span><br><span class="line">        ret++;</span><br><span class="line">    &#125;</span><br><span class="line">    if(*ret == &apos;\0&apos;)</span><br><span class="line">    &#123;</span><br><span class="line">        return NULL;</span><br><span class="line">    &#125;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>（8）atoi函数：int atoi(const char * nptr)</p>
+<p> 功能：把字符串转换成整型数。扫描参数nptr字符串，跳过前面的空格字符，直到遇上数字或正负符号才开始做转换，而再遇到非数字或字符串结束符(‘\0’)才结束转换，并将结果返回。</p>
+<blockquote>
+<p>思路：定义int变量num存放转换的整型数，定义两个标志（flag_num作数字组已经结束的标记；flag_symbol作符号标记）</p>
+<p> while循环直到*npt不为’\0’ ；如果遇到’-‘则flag_symbol=-1；如果遇到’+’则flag_symbol=1 ；如果遇到数字组，标记不为-1时作正数的转换；如果遇到数字组，标记为-1时作负数的转换</p>
+<p> 当数字组结束遇到其他字符时则打破循环，返回num值</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> int myatoi(const char* nptr)</span><br><span class="line">&#123;</span><br><span class="line">    int num = 0;</span><br><span class="line">    int flag_num = 0;</span><br><span class="line">    int flag_symbol = 0;</span><br><span class="line"></span><br><span class="line">    while(*nptr != &apos;\0&apos;)</span><br><span class="line">    &#123;</span><br><span class="line">        if((*nptr == &apos;-&apos;) &amp;&amp; !flag_symbol)</span><br><span class="line">        &#123;</span><br><span class="line">            flag_symbol = -1;</span><br><span class="line">        &#125;</span><br><span class="line">        else if((*nptr == &apos;+&apos;) &amp;&amp; !flag_symbol)</span><br><span class="line">        &#123;</span><br><span class="line">            flag_symbol = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        else if((*nptr &gt;= &apos;0&apos;) &amp;&amp; (*nptr &lt;= &apos;9&apos;) &amp;&amp; (flag_symbol != -1))</span><br><span class="line">        &#123;</span><br><span class="line">            flag = 1;</span><br><span class="line">            num = num * 10 + *nptr - &apos;0&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        else if((*nptr &gt;= &apos;0&apos;) &amp;&amp; (*nptr &lt;= &apos;9&apos;) &amp;&amp; (flag_symbol == -1))</span><br><span class="line">        &#123;</span><br><span class="line">            flag = 1;</span><br><span class="line">            num = num * 10 + &apos;0&apos; - *nptr;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(flag)</span><br><span class="line">        &#123;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        nptr++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+	
+    
+    
+    
+		<div>
+			
+				
+			
+		</div>
+        
+      
+        <div id="reward-container">
+  <div>走过路过不要错过</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="谢喵喵 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="谢喵喵 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/CSDN迁移/" rel="tag"><i class="fa fa-tag"></i># CSDN迁移</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/05/26/【Linux】文件系统编程/" rel="next" title="【Linux】文件系统编程">
+                  <i class="fa fa-chevron-left"></i> 【Linux】文件系统编程
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2017/09/06/【C语言】报3退圈/" rel="prev" title="【C语言】报3退圈">
+                  【C语言】报3退圈 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjI3Ny8yMjc4OA=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/头像.png"
+      alt="谢喵喵">
+  <p class="site-author-name" itemprop="name">谢喵喵</p>
+  <div class="site-description" itemprop="description">加油!!!!!</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Artist-V" title="GitHub &rarr; https://github.com/Artist-V" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/1642352595" title="Weibo &rarr; https://weibo.com/1642352595" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https://www.baidu.com/" rel="noopener" target="_blank">百度一下</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谢喵喵</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">98k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:29</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

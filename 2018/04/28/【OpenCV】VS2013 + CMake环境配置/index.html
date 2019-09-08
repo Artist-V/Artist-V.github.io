@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/龙.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89636294">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【OpenCV】VS2013 + CMake环境配置">
+<meta property="og:url" content="http://yoursite.com/2018/04/28/【OpenCV】VS2013 + CMake环境配置/index.html">
+<meta property="og:site_name" content="XieXinBei&#39;s Blog">
+<meta property="og:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89636294">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428151133430.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428151324994.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428151424588.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428151432342.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428151507445.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428151519937.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428170615642.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428170749538.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019042813333910.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428142642770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428150229658.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428150625966.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428150842562.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428150949373.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428152333619.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019042815243279.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428161307398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019051011025016.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190510110004148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190510105945815.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190510232919529.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190428171036273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-08T11:56:05.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【OpenCV】VS2013 + CMake环境配置">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89636294">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190428151133430.png">
+  <link rel="canonical" href="http://yoursite.com/2018/04/28/【OpenCV】VS2013 + CMake环境配置/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【OpenCV】VS2013 + CMake环境配置 | XieXinBei's Blog</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XieXinBei's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">8</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">0</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/28/【OpenCV】VS2013 + CMake环境配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谢喵喵">
+      <meta itemprop="description" content="加油!!!!!">
+      <meta itemprop="image" content="/images/头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XieXinBei's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">【OpenCV】VS2013 + CMake环境配置
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-28 17:08:29" itemprop="dateCreated datePublished" datetime="2018-04-28T17:08:29+08:00">2018-04-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-08 19:56:05" itemprop="dateModified" datetime="2019-09-08T19:56:05+08:00">2019-09-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.2k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> </a> 版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。  本文链接：<a href="https://blog.csdn.net/qq_42417182/article/details/89636294" target="_blank" rel="noopener">https://blog.csdn.net/qq_42417182/article/details/89636294</a>   </p><a id="more"></a>
+<p>   参考文章：</p>
+<p> <a href="https://blog.csdn.net/qq_42438771/article/details/89576505" target="_blank" rel="noopener">【OpenCV】VS2017 + CMake环境配置</a></p>
+<p> <a href="https://blog.csdn.net/Lin_Mengxuan/article/details/89474834#cmake_OpenCV_39" target="_blank" rel="noopener">学习小结：QT、OpenCV、cmake配置相关资料</a></p>
+<p> 其实cmake和cmakelists就像Linux里面的make和makefile =-= 难以言喻</p>
+<h3 id="配置方法："><a href="#配置方法：" class="headerlink" title="配置方法："></a>配置方法：</h3><ol>
+<li>下一个<a href="https://cmake.org/download/" target="_blank" rel="noopener">cmake </a>，选择<img src="https://img-blog.csdnimg.cn/20190428151133430.png" alt> </li>
+<li>在source code中选择源文件（带CMakeLists.txt的），和cmake后工程的路径<img src="https://img-blog.csdnimg.cn/20190428151324994.png" alt> </li>
+<li>先按configure<img src="https://img-blog.csdnimg.cn/20190428151424588.png" alt>然后出现<img src="https://img-blog.csdnimg.cn/20190428151432342.png" alt>，如果没有出现，请看后面的配置失误解决办法 </li>
+<li>再按genarate<img src="https://img-blog.csdnimg.cn/20190428151507445.png" alt>然后出现<img src="https://img-blog.csdnimg.cn/20190428151519937.png" alt> </li>
+<li>cmake后工程的路径中打开工程 </li>
+<li>右击要生成的项目，选择设为启动项目<img src="https://img-blog.csdnimg.cn/20190428170615642.png" alt> </li>
+<li><a href="https://blog.csdn.net/qq_42417182/article/details/84984289" target="_blank" rel="noopener">配置opencv：附加包含目录、附加库目录、附加依赖值</a> （可以参考我以前的文章） <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      opencv_core2411d.lib</span><br><span class="line">opencv_highgui2411d.lib</span><br><span class="line">opencv_imgproc2411d.lib</span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ol>
+<ol start="15">
+<li><img src="https://img-blog.csdnimg.cn/20190428170749538.png" alt>，运行即可 </li>
+</ol>
+<h3 id="配置时会出现的几个问题："><a href="#配置时会出现的几个问题：" class="headerlink" title="配置时会出现的几个问题："></a>配置时会出现的几个问题：</h3><p> 1、cmake显示 找不到C和C++的编译器</p>
+<blockquote>
+<p>No CMAKE_C_COMPILER could be found</p>
+<p> No CMAKE_CXX_COMPILER could be found</p>
+<p> 解决方案：因为别人是没有在系统环境变量里设置vs2013的C/C++编译器，所以设置了就好了，而我的是因为以前我的电脑坏了，然后用了别人的电脑，最后把在他电脑里我的文件全部拷贝过来了，就产生了一些系统错误，以前配置opengl的时候我有一个链接库也搞不起来，都是自己手动加的，所以我后面还是把我的vs2013修复了一下，最后好了</p>
+<p> 2、cmake显示 找不到opencv的路径</p>
+</blockquote>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/2019042813333910.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190428142642770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> 参考文章：<a href="https://blog.csdn.net/mengchicmc/article/details/78458246" target="_blank" rel="noopener">Cmake 找不到OpenCVConfig.cmake文件</a></p>
+<p> 解决方案：</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190428150229658.png" alt></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190428150625966.png" alt></p>
+<p> CMakeLists.txt, 把原来的第六行去掉，换成<img src="https://img-blog.csdnimg.cn/20190428150842562.png" alt></p>
+<p> configure成功<img src="https://img-blog.csdnimg.cn/20190428150949373.png" alt></p>
+<p> 以上两个原因我觉得都是因为，vs2013和opencv没有安装到默认路径中。</p>
+</blockquote>
+<p> 3、无法打开包括文件<img src="https://img-blog.csdnimg.cn/20190428152333619.png" alt><img src="https://img-blog.csdnimg.cn/2019042815243279.png" alt></p>
+<p> 4、没有配置opencv <img src="https://img-blog.csdnimg.cn/20190428161307398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> 5、显示gl.h头文件的错误，一对重定义还是什么的，反正很多</p>
+<blockquote>
+<p>解决：多加一个头文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;  #include &lt;windows.h&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p> 6、显示语法错误</p>
+</blockquote>
+<p> <img src="https://img-blog.csdnimg.cn/2019051011025016.png" alt><img src="https://img-blog.csdnimg.cn/20190510110004148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<blockquote>
+<p>解决方法：给那个加一个括号<img src="https://img-blog.csdnimg.cn/20190510105945815.png" alt></p>
+<p> 7、</p>
+</blockquote>
+<p> <img src="https://img-blog.csdnimg.cn/20190510232919529.png" alt></p>
+<blockquote>
+<p>解决方法：无</p>
+<p> 我还是向“邪恶势力”屈服了，下载了人家已经配好的opengl的opencv，但是那个版本的opencv是对应vc2017版本及以上的，于是我一不做二不休，下载了vs2019反正它说这个对什么都兼容。</p>
+<p> 哎</p>
+</blockquote>
+<h1 id="彩蛋？"><a href="#彩蛋？" class="headerlink" title="彩蛋？"></a>彩蛋？</h1><p> <img src="https://img-blog.csdnimg.cn/20190428171036273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> 至于这个标题是怎么回事</p>
+<p> 还有代码是怎么回事</p>
+<p> 下回分解，现在要去吃饭了 <em>_</em></p>
+<p> 五一快乐</p>
+
+    </div>
+	
+    
+    
+    
+		<div>
+			
+				
+			
+		</div>
+        
+      
+        <div id="reward-container">
+  <div>走过路过不要错过</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="谢喵喵 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="谢喵喵 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/CSDN迁移/" rel="tag"><i class="fa fa-tag"></i># CSDN迁移</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/04/11/【数据结构】链表/" rel="next" title="【数据结构】链表">
+                  <i class="fa fa-chevron-left"></i> 【数据结构】链表
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/05/20/【配置】windows10下载安装MySQL8.0.16/" rel="prev" title="【配置】windows10下载安装MySQL8.0.16">
+                  【配置】windows10下载安装MySQL8.0.16 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjI3Ny8yMjc4OA=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置方法："><span class="nav-number">1.</span> <span class="nav-text">配置方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置时会出现的几个问题："><span class="nav-number">2.</span> <span class="nav-text">配置时会出现的几个问题：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#彩蛋？"><span class="nav-number"></span> <span class="nav-text">彩蛋？</span></a></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/头像.png"
+      alt="谢喵喵">
+  <p class="site-author-name" itemprop="name">谢喵喵</p>
+  <div class="site-description" itemprop="description">加油!!!!!</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Artist-V" title="GitHub &rarr; https://github.com/Artist-V" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/1642352595" title="Weibo &rarr; https://weibo.com/1642352595" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https://www.baidu.com/" rel="noopener" target="_blank">百度一下</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谢喵喵</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">98k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:29</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

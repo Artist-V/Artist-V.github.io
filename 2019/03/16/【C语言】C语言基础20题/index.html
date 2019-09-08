@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/龙.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/龙.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/87933240">
+<meta name="keywords" content="CSDN迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C语言】C语言基础20题">
+<meta property="og:url" content="http://yoursite.com/2019/03/16/【C语言】C语言基础20题/index.html">
+<meta property="og:site_name" content="XieXinBei&#39;s Blog">
+<meta property="og:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/87933240">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226131747460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226133201122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226135131749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226141012230.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226141404443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226142500858.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226144822422.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226144829986.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226145406522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226145422469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315162730243.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315163850312.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315163928928.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019022615015937.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150207751.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315165509345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315165437897.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20180414120446530?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E1NzQ3ODAxOTY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315171618695.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019031517171396.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150226716.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/201902261502332.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315175658763.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150240756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150248193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190315181657757.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150258899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190316172731643.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150306813.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150315767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150322880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190226150329515.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190316180632515.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190316181746698.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190316182210687.png">
+<meta property="og:updated_time" content="2019-09-08T12:18:25.575Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【C语言】C语言基础20题">
+<meta name="twitter:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/87933240">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190226131747460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
+  <link rel="canonical" href="http://yoursite.com/2019/03/16/【C语言】C语言基础20题/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【C语言】C语言基础20题 | XieXinBei's Blog</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XieXinBei's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">8</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">0</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/16/【C语言】C语言基础20题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="谢喵喵">
+      <meta itemprop="description" content="加油!!!!!">
+      <meta itemprop="image" content="/images/头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XieXinBei's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">【C语言】C语言基础20题
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-16 18:22:32" itemprop="dateCreated datePublished" datetime="2019-03-16T18:22:32+08:00">2019-03-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-08 20:18:25" itemprop="dateModified" datetime="2019-09-08T20:18:25+08:00">2019-09-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>7.1k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>6 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> </a> 版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。  本文链接：<a href="https://blog.csdn.net/qq_42417182/article/details/87933240" target="_blank" rel="noopener">https://blog.csdn.net/qq_42417182/article/details/87933240</a>   </p><a id="more"></a>
+<p>   <img src="https://img-blog.csdnimg.cn/20190226131747460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>考点：类型隐式转换</strong></p>
+<p> <strong>答案：&gt;6</strong></p>
+<p> 解释：当表达式中存在有符号数和无符号数时，所有操作数都自动转换为无符号数</p>
+<p> a = 6 = (0000 0000 0000 0000 0000 0000 0000 0110)2 以32位系统为例</p>
+<p> b = -20 = (1000 0000 0000 0000 0000 0000 0001 0100)2</p>
+<p> b的补码 = (1111 1111 1111 1111 1111 1111 1110 1100)2 b=-20转换为无符号数得到的数，是一个非常大的整数</p>
+<blockquote>
+<p>若题目输出部分改成：</p>
+<p> （a+b&gt;6) ? printf(“&gt;6”) : printf(“&lt;=6”);</p>
+<p> 输出结果相同</p>
+</blockquote>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226133201122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>考点：读越界，写越界</strong></p>
+<p> <strong>答案：段错误</strong></p>
+<p> strcpy( char * str1,char * str2)的工作原理是，扫描str2指向的内存，逐个字符赋给s1所指向的内存，直到碰到’\0’。</p>
+<p> 因为在这种赋值方式下，str1={a,a,a,a,a,a,a,a,a,a},没有’\0’，所以赋值不能结束，所以使用strcpy函数赋值时字节数具有不确定性，不知道在末尾会赋什么值。</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226135131749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>考点：static、变量</strong></p>
+<p> <strong>答案：i = 10 ；j = 1</strong></p>
+<p> 解释：</p>
+<p> 1、被static修饰的变量存储在静态数据区，当函数运行结束后，该变量不会被释放，函数在下一次被运行时依然可以使用其值</p>
+<p> 2、静态变量只被初始化一次，函数下次运行会直接跳过初始化（static int i = 0 // ）</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226141012230.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>考点：数组和指针的区别，sizeof</strong></p>
+<p> <strong>答案：</strong></p>
+<p> （1）4 （sizeof(p)的意思是，指针p占4个字节）</p>
+<p> （2）4 （sizeof(* p)的意思是，指针p指向的int类型占4个字节）</p>
+<p> （3）400 （sizeof(a)的意思是，数组a一共占4*100=400个字节）</p>
+<p> （4）4 （a[100]是一个int类型的元素，占4个字节）感觉a[100]这样是不太对的啊？？？越界了吧？？</p>
+<p> （5）4 （sizeof(&amp;a)中，a代表数组的首元素，&amp;a表示首元素的地址，地址占4个字节）</p>
+<p> （6）4 （a[0]是数组的第一个元素，地址占4个字节）</p>
+<p> （7）4 （当数组作为函数的参数进行传递时，会自动变为同类型的指针sizeof(b) —&gt; sizof(int * )，指针占4个字节）</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226141404443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>考点：字符串结束符，char 的范围</strong></p>
+<p> <strong>答案：255</strong></p>
+<p> 解析：a[0] = -1; a[1] = -2 ; a[2] = -3 … a[127] = -128 ; a[128] = 127 ; a[129] = 126 … a[255] = 0</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226142500858.png" alt></p>
+<p> <strong>考点：const</strong></p>
+<p> <strong>答案：</strong></p>
+<p> （1）p的指向可改，p指向的内容不可改（const修饰的是*p）</p>
+<p> （2）p的指向可改，p指向的内容不可改（const修饰的是*p）</p>
+<p> （3）p的指向不可改，p指向的内容可改（const修饰的是p）</p>
+<p> （4）p的指向不可改，p指向的内容也不可改（const既修饰了*p也修饰了p）</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226144822422.png" alt><img src="https://img-blog.csdnimg.cn/20190226144829986.png" alt></p>
+<p> 因为没有学过volatile，于是……</p>
+<blockquote>
+<p>在代码1后两条语句中，i 没有被用作左值。这时候编译器认为 i 的值没有发生改变，所以在（1）语句时从内存中取出 i 的值赋给 j 之后，这个值并没有被丢掉，而是在（2）语句时继续用这个值给 k 赋值。编译器不会生成出汇编代码重新从内存里取 i 的值，这样提高了效率。但要注意：（1）、（2）语句之间 i 没有被用作左值才行。<br> volatile 关键字告诉编译器 i 是随时可能发生变化的，每次使用它的时候必须从内存中取出 i，的值，因而编译器生成的汇编代码会重新从 i 的地址处读取数据放在 k 中。   </p>
+<h2 id="volatile-可以保证对特殊地址的稳定访问"><a href="#volatile-可以保证对特殊地址的稳定访问" class="headerlink" title=" volatile 可以保证对特殊地址的稳定访问  "></a> volatile 可以保证对特殊地址的稳定访问  </h2><p> 作者：Jeanne_ou<br> 来源：CSDN<br> 原文：<a href="https://blog.csdn.net/Erica_ou/article/details/81320946" target="_blank" rel="noopener">https://blog.csdn.net/Erica_ou/article/details/81320946</a></p>
+<hr>
+<p> volatile表示一个变量也许会被后台程序改变</p>
+<p> 关键字 volatile 是与 const 绝对对立的。它指示一个变量也许会被某种方式修改，这种方式按照正常程序流程分析是无法预知的（例如，一个变量也许会被一个中断服务程序所修改）。</p>
+<p> 这个关键字使用下列语法定义：</p>
+<p> volatile data-definition;<br> 变量如果加了 volatile 修饰，则会*<em>从内存重新装载内容，而不是直接从寄存器拷贝内容。 *</em></p>
+<h2 id="volatile应用比较多的场合，在中断服务程序和cpu相关寄存器的定义。"><a href="#volatile应用比较多的场合，在中断服务程序和cpu相关寄存器的定义。" class="headerlink" title=" volatile应用比较多的场合，在中断服务程序和cpu相关寄存器的定义。  "></a> volatile应用比较多的场合，在<strong>中断服务程序</strong>和<strong>cpu相关寄存器的定义</strong>。  </h2><p> 作者：聚优致成<br> 来源：CSDN<br> 原文：<a href="https://blog.csdn.net/qq_29350001/article/details/54024070" target="_blank" rel="noopener">https://blog.csdn.net/qq_29350001/article/details/54024070</a></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190226145406522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+</blockquote>
+<hr>
+<p> <img src="https://img-blog.csdnimg.cn/20190226145422469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> （代码出自&lt;&lt;C语言深度剖析&gt;&gt;陈正冲 著）<strong>考点：指针、数组</strong></p>
+<p> <strong>答案：5，200 0000</strong></p>
+<p> （1）int * ptr1 = (int*)(&amp;a + 1)</p>
+<p> &amp;a –&gt;** &amp;a表示数组的首地址，**&amp;a是一个指针而非普通数值(虽然它本质上也是一个整数)</p>
+<p> 假如此时&amp;a=0xFFFF5700，那么&amp;a+1是多少呢？<strong>答案是：取决于&amp;a的类型**</strong> **</p>
+<ol>
+<li><p>如果&amp;a是一个指向char型的指针，那么&amp;a+1 = 0xFFFF5701</p>
+</li>
+<li><p>如果&amp;a是一个指向int型的指针，那么&amp;a+1 = 0xFFFF5704 (32位)</p>
+</li>
+<li><p>如果&amp;a是一个指向某种结构体struct foo的指针，那么&amp;a+1 = 0xFFFF5700+sizeof(struct foo) &amp;a+1 –&gt;** &amp;a+1表示的是指针加法运算**</p>
+<p>int * ptr1 = (int * )(&amp;a + 1)  –&gt; ptrl1指向<strong>数组a最后一个元素之后的下一个内存单元</strong>开始的4个字节（int*)内存</p>
+<p>%x，prt1[-1] –&gt; ptr1[-1]相当于把ptr1往后挪一个整型大小（4字节），即*<em>ptr1[-1]指向数组a的最后一个元素 *</em>–&gt;结果为5</p>
+<p><img src="https://img-blog.csdnimg.cn/20190315162730243.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p>（2）int <em>ptr2 = (int</em>)((int)a + 1)</p>
+<p>(int)a –&gt; 把数组名a强制转换成整型变量</p>
+<p>(int)a + 1 –&gt; 把整型变量a + 1</p>
+<p>int <em>ptr2 = (int</em>)((int)a + 1)  –&gt; ptr2指向a[0]的第二个字节</p>
+<p>%x，*prt2  –&gt; 输出的内容就是ptr2所指向的往后4个字节的内容</p>
+<p>但是机器究竟会把这个数输出成大端字节序呢，还是解释成小端字节序呢？</p>
+<p><strong>答案是：</strong>x86平台是小端序的，存取时*<em>最低位 *</em>对应 *<em>低地址 *</em>，因此将会打印出0200 0000</p>
+<p>（如果题目没有指出是x86则答案不确定）</p>
+</li>
+</ol>
+<blockquote>
+<p>官方解释：</p>
+<p> 1、所谓大端(big-endian)序，就是<strong>高优先位</strong> 对应<strong>高有效位</strong> 。</p>
+<p> 2、所谓小端(little-endian)序，就是<strong>高优先位</strong> 对应*<em>低有效位 *</em>。</p>
+<p> 民间解释：</p>
+<p> 1、所谓大端(big-endian)序，就是读取或者存放数据时，*<em>最低 位 *</em>对应 *<em>高地址 *</em>。</p>
+<p> 2、所谓小端(big-endian)序，就是读取或者存放数据时，*<em>最低 位 *</em>对应 *<em>低地址 *</em>。</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190315163850312.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+</blockquote>
+<hr>
+<p> 来源：<a href="https://blog.csdn.net/qq_42282258/article/details/82711516" target="_blank" rel="noopener">https://blog.csdn.net/qq_42282258/article/details/82711516</a></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190315163928928.png" alt>尝试输出，结果相同</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/2019022615015937.png" alt></p>
+<p> <strong>考点：运算符优先级？</strong></p>
+<p> <strong>答案：0x20</strong></p>
+<p> +的优先级为12，&lt;&lt;的优先级为11，因此先算加法 2 + 3 = 5</p>
+<p> 0x01 &lt;&lt; 5 ==&gt; 0x01是十六进制的1即为0000 00001，左移5位则为 0010 0000 为十进制的 32</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150207751.png" alt></p>
+<p> <strong>考点：宏定义</strong></p>
+<p> <strong>答案：</strong>#define squ(x) ((x) * (x))</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190315165509345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt><img src="https://img-blog.csdnimg.cn/20190315165437897.png" alt></p>
+<p> <strong>考点：字对齐、半字对齐</strong></p>
+<p> <strong>答案：TestStruct1占12字节，TestStruct2占8字节</strong></p>
+<p> 字对齐：int型变量占4个字节</p>
+<p> 后一个变量若能在前一个变量分配的空间中存放下，则后一个变量不再重新分配空间。</p>
+<p> 半字对齐：short型变量占2个字节</p>
+<p> c1 占1字节，s占2字节，c2占1字节，i占4字节</p>
+<p> struct TestStruct1 struct TestStruct2：</p>
+<p> <img src="https://img-blog.csdn.net/20180414120446530?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E1NzQ3ODAxOTY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="è¿éåå¾çæè¿°"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;studo.h&gt;</span><br><span class="line"></span><br><span class="line">struct TestStruct1          //struct TestStruct2</span><br><span class="line">&#123;                           //&#123;</span><br><span class="line">    char c1;                //    char c1;</span><br><span class="line">    short s;                //    char c2;</span><br><span class="line">    char c2;                //    short s;</span><br><span class="line">    int i;                  //    int i;</span><br><span class="line">&#125;;                          //&#125;;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    TestStruct1 test;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%p\n&quot;, (unsigned int)(void *)&amp;test.i - (unsigned int)(void *)&amp;test);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdnimg.cn/20190315171618695.png" alt> 所以TestStruct1占8 + 4 = 12字节</p>
+<p> <img src="https://img-blog.csdnimg.cn/2019031517171396.png" alt> TestStruct1占4 + 4 = 8字节</p>
+<blockquote>
+<p>格式控制符“%p”中的p是pointer（指针）的缩写。指针的值是语言实现（编译程序）相关的，但几乎所有实现中，指针的值都是一个表示地址空间中某个存储器单元的整数。printf函数族中对于%p一般以十六进制整数方式输出指针的值。</p>
+</blockquote>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150226716.png" alt></p>
+<p> <strong>答案：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> int *p = (int *)0x12ff7c;</span><br><span class="line">*p = 0x100;</span><br><span class="line"></span><br><span class="line">//*(int*)0x12ff7c = 0x100;</span><br></pre></td></tr></table></figure>
+
+<p> （1）可以通过一个指针向其指向的内存地址写入数据</p>
+<p> 将地址0x12ff7c赋值给指针变量p的时候必须<strong>强制类型转换</strong></p>
+<p> （2）直接赋值</p>
+<p> 但是试了一下都是段错误，不知道是什么情况</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/201902261502332.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>答案：2，5</strong></p>
+<p> 同第8题；</p>
+<p> a + 1 ==&gt; 数组首元素的下一个元素 ==&gt; 2</p>
+<p> ptr - 1 ==&gt; 5</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190315175658763.png" alt></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150240756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>答案：</strong></p>
+<p> <strong>（1）p + 0x1 = 0x100014</strong></p>
+<p> <strong>（2）（unsigned long)p + 0x1 = 0x100001</strong></p>
+<p> <strong>（3）（unsigned int*)p + 0x1 = 0x100004</strong></p>
+<p> p指向结构体的首地址，则p+1这是指向下一个结构体的地址，而该结构体所占的内存为sizeof(struct Test)=20</p>
+<p> 因为假设了p的值为0x100000，所以：</p>
+<p> （1）p + 0x1 = 0x100014</p>
+<p> p指向结构体的首地址，则p+1为指针+1，指向下一个结构体的地址，而该结构体所占的内存为sizeof(struct Test)=20</p>
+<p> （2）（unsigned long)p + 0x1 = 0x100001</p>
+<p> (unsigned long)p，把p转换为一个无符号长整形数，为数值+1</p>
+<p> （3）（unsigned int*)p + 0x1 = 0x100004</p>
+<p> (unsigned int*)p，把p转换成一个无符号的int类型的指针，占4个字节内存，为指针+1，指向下一个4字节内存的地址</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150248193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<ul>
+<li><p>答案：1</p>
+<p>本来我想的是：</p>
+<p>a[0] ==&gt; 数组的第一行元素，把第一行的首地址赋给指针p</p>
+<p>p[0] ==&gt;第一行第一个元素 ==&gt; 0</p>
+<p><img src="https://img-blog.csdnimg.cn/20190315181657757.png" alt></p>
+<p>一运行发现结果错了，而且二维数组存的也不是想象中的数。</p>
+<p>把数组初始化改成int a[3][2] = {0,1,2,3,4,5} 之后，答案就和我想得一样了。</p>
+<p>原因：</p>
+<p>int a[3][2] = {(0,1),(2,3),(4,5)} ; // () 圆括号</p>
+<p>int a[3][2] = { {0 , 1} ,{ 2 , 3 } , { 4 , 5 } } ; // {} 花括号</p>
+</li>
+</ul>
+<blockquote>
+<p>多维数组初始化时，如果将{}花括号写成()圆括号，那么多维数组将把(0,1),(2,3),(4,5)解释为{1,3,5}，</p>
+<p> <strong>只取逗号运算符后面的数</strong></p>
+<p> 来源：<a href="https://blog.csdn.net/DynastyDoubleH/article/details/84579880" target="_blank" rel="noopener">https://blog.csdn.net/DynastyDoubleH/article/details/84579880</a></p>
+</blockquote>
+<hr>
+<p> <img src="https://img-blog.csdnimg.cn/20190226150258899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> 我看的时候觉得没什么错的，直到我在红帽里输了一下（其实刚开始输的时候习惯性写成了fun(b)，结果运行正确，我还在想这题出错啦？有点蠢=-=）</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190316172731643.png" alt></p>
+<p> 就是fun(b[10])嘛</p>
+<p> <strong>答案：</strong></p>
+<p> <strong>1、传参b[10]已经发生越界了，在编译时没有出错（没有去到实际地址取值），但运行时计算b[10]的实际地址，发生越界错误。<br> 2、fun（）函数的参数是char*类型的，而实参是一个char 类型的参数，编译时发生错误。</strong>  </p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150306813.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>答案：段错误</strong></p>
+<p> 我看到题目的时候首先是觉得char * name 和strcpy(pst-&gt;name,”Jimy”)，很奇怪，但是又有点说不上来错在哪里。</p>
+<p> 然后我看到pstu是结构体类型的指针，在主函数中给pstu分配了内存空间，有了明确的地址（分配成功的情况下）</p>
+<p> 其实在student结构体中的char * name，只是为其分配了4字节的内存，<strong>但它并没有指向一个合法的地址</strong>，这时name指针指向的区域只是一些乱码，或许可能还没有访问权限。<strong>所以name是野指针</strong>，它是许多程序bug的根源。</p>
+<p> 参考来源：<a href="https://www.cnblogs.com/evisie/archive/2011/08/04/2128051.html" target="_blank" rel="noopener">https://www.cnblogs.com/evisie/archive/2011/08/04/2128051.html</a></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150315767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>答案：</strong></p>
+<p> <strong>0</strong></p>
+<p> <strong>1</strong></p>
+<p> <strong>2</strong></p>
+<p> <strong>5</strong></p>
+<p> <strong>10</strong></p>
+<p> 过程：</p>
+<ol>
+<li>fun(10) –&gt; 调用fun(10/2)=fun(5) <strong>递归调用</strong></li>
+<li>fun(5) –&gt; 调用fun(5/2)=fun(2)</li>
+<li>fun(2) –&gt; 调用fun(2/2)=fun(1)</li>
+<li>fun(1) –&gt;调用fun(1/2)=fun(0)</li>
+<li>输出i=0 –&gt;<strong>回到结束递归调用的位置，执行下一条语句</strong></li>
+<li>输出i=2 –&gt;<strong>回到结束递归调用的位置，执行下一条语句</strong></li>
+<li>输出i=5 –&gt;<strong>回到结束递归调用的位置，执行下一条语句</strong></li>
+<li>输出i=10</li>
+</ol>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150322880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
+<blockquote>
+<p>答案：由于<strong>getchar函数的返回值是int型，如果用char类型进行接收的话可能会发生信息遗漏</strong>。   </p>
+<p> 关于getchar()：<br> 返回值：getchar函数的返回值是用户输入的第一个字符的ASCII码，当出错时返回-1。并且将用户输入的字符回显到屏幕。<br> 如果用户在按回车之前输入了不止一个字符那么其他字符会保留在键盘缓存区中，等待后续getchar调用读取。（这也是为什么有的main函数中的最后一句会是getchar()的原因）也就是说,<strong>后续的getchar调用不会等待用户按键，而直接读取缓冲区中的字符，直到缓冲区中的字符读完为后才等待用户按键</strong>。</p>
+<blockquote>
+<hr>
+<p> 作者：Jeanne_ou<br> 来源：CSDN<br> 原文：<a href="https://blog.csdn.net/Erica_ou/article/details/81320946" target="_blank" rel="noopener">https://blog.csdn.net/Erica_ou/article/details/81320946</a></p>
+</blockquote>
+</blockquote>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20190226150329515.png" alt></p>
+<p> Big_endian 大端字节序： 数据的高字节位存储在低地址对应的存储单元</p>
+<p> Little_endian 小端字节序：数据的低字节位存放在低地址对应的存储单元</p>
+<p> 如果我们将0x1234abcd 写入到以0x0000 开始的内存中，则Little endian 和Big endian 模式的存放结果如下：</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190316180632515.png" alt></p>
+<p> 用<strong>共用体</strong>验证大小端字节序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">union test</span><br><span class="line">&#123;</span><br><span class="line">    int a;</span><br><span class="line">    char b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int mian()</span><br><span class="line">&#123;</span><br><span class="line">    union test t;</span><br><span class="line">    t.a = 0x1234abcd;</span><br><span class="line"></span><br><span class="line">    printf(&quot;addr:&amp;p\n&quot;,t.b); //按图示，若取b地址为12则为大端，为cd则为小端</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdnimg.cn/20190316181746698.png" alt></p>
+<p> 用<strong>指针</strong>验证大小端字节序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int mian()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 0x1234abcd;</span><br><span class="line"></span><br><span class="line">    char b = *((char *)(&amp;a)); // 将a的地址转换为char *类型，并取内容赋给b</span><br><span class="line"></span><br><span class="line">    printf(&quot;addr:&amp;p\n&quot;,t.b);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdnimg.cn/20190316182210687.png" alt></p>
+<hr>
+<p>看到CSDN也有别的文章解析这20题：🐎一下</p>
+<ol>
+<li><a href="https://blog.csdn.net/Erica_ou/article/details/81320946" target="_blank" rel="noopener">https://blog.csdn.net/Erica_ou/article/details/81320946</a>    </li>
+</ol>
+
+    </div>
+	
+    
+    
+    
+		<div>
+			
+				
+			
+		</div>
+        
+      
+        <div id="reward-container">
+  <div>走过路过不要错过</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="谢喵喵 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="谢喵喵 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/CSDN迁移/" rel="tag"><i class="fa fa-tag"></i># CSDN迁移</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/02/13/【C语言】排序算法/" rel="next" title="【C语言】排序算法">
+                  <i class="fa fa-chevron-left"></i> 【C语言】排序算法
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/07/16/【C语言】八大排序算法/" rel="prev" title="【C语言】八大排序算法">
+                  【C语言】八大排序算法 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NjI3Ny8yMjc4OA=="></div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile-可以保证对特殊地址的稳定访问"><span class="nav-number">1.</span> <span class="nav-text"> volatile 可以保证对特殊地址的稳定访问  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile应用比较多的场合，在中断服务程序和cpu相关寄存器的定义。"><span class="nav-number">2.</span> <span class="nav-text"> volatile应用比较多的场合，在中断服务程序和cpu相关寄存器的定义。  </span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/头像.png"
+      alt="谢喵喵">
+  <p class="site-author-name" itemprop="name">谢喵喵</p>
+  <div class="site-description" itemprop="description">加油!!!!!</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Artist-V" title="GitHub &rarr; https://github.com/Artist-V" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/1642352595" title="Weibo &rarr; https://weibo.com/1642352595" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https://www.baidu.com/" rel="noopener" target="_blank">百度一下</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">谢喵喵</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">98k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:29</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>
