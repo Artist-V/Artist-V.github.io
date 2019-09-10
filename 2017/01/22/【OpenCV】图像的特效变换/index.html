@@ -58,7 +58,7 @@
 </script>
 
   <meta name="description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/86590505">
-<meta name="keywords" content="CSDN迁移">
+<meta name="keywords" content="OpenCV">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【OpenCV】图像的特效变换">
 <meta property="og:url" content="http://yoursite.com/2017/01/22/【OpenCV】图像的特效变换/index.html">
@@ -68,7 +68,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190122103803450.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190122103823872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190122103840603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-08T11:55:58.226Z">
+<meta property="og:updated_time" content="2019-09-10T05:03:39.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【OpenCV】图像的特效变换">
 <meta name="twitter:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/86590505">
@@ -191,7 +191,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">9</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">13</span></a>
 
   </li>
       
@@ -217,7 +217,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -313,7 +313,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-08 19:55:58" itemprop="dateModified" datetime="2019-09-08T19:55:58+08:00">2019-09-08</time>
+                <time title="修改时间：2019-09-10 13:03:39" itemprop="dateModified" datetime="2019-09-10T13:03:39+08:00">2019-09-10</time>
               </span>
             
           
@@ -371,7 +371,7 @@
 <p> INTER_NEAREST - 最近邻插值</p>
 <p> INTER_LINEAR – 双线性插值（默认值）</p>
 <ol>
-<li>borderMode（边界模式）：有默认值BORDER_CONSTANT，表示目标图像中“离群点（outliers）”的像素值不会被此函数修改。 </li>
+<li>borderMode（边界模式）：有默认值BORDER_CONSTANT，表示目标图像中“离群点（outliers）”的像素值不会被此函数修改。</li>
 <li>borderValue（当有常数边界时使用的值）：其有默认值Scalar( )，即默认值为Scalar( 0，0，0)<br>几何变换方式：</li>
 </ol>
 </blockquote>
@@ -381,7 +381,7 @@
 <p> （1）扭曲变换公式：</p>
 <p> 图像围绕一个坐标为（Xc,Yc）的定位点旋转一个随空间变化的旋转角度，这个角度在定位点的值为α，α的值随着与中心径向距离的增加而线性减少。这种效果局限于最大半径为rmax的区域，这个区域以外的像素保持不变。</p>
 <p> <img src="https://img-blog.csdnimg.cn/20190122103803450.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> //扭曲变换函数</span><br><span class="line">void WrapImage(Mat &amp;mapx, Mat &amp;mapy, int width, int height, int alpha)</span><br><span class="line">&#123;</span><br><span class="line">	//alpha:离中心定点越远扭曲程度越高</span><br><span class="line">	//图像绕(xc,yc)旋转,rmax扭曲范围</span><br><span class="line">	float xc = width / 2.0;</span><br><span class="line">	float yc = height / 2.0;</span><br><span class="line">	for (int i = 0; i &lt; width; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 0; j &lt; height; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			//改变map_x &amp; map_y的值. </span><br><span class="line"></span><br><span class="line">			float dx = i - xc;</span><br><span class="line">			float dy = j - yc;</span><br><span class="line">			float r = sqrt(dx*dx + dy*dy);</span><br><span class="line">			//double atan2(double y,double x) 返回的是原点至点(x,y)的方位角，即与 x 轴的夹角。</span><br><span class="line">			float theta = atan2(dx, dy);</span><br><span class="line">			float beta = theta + alpha*((rmax - r) / rmax);</span><br><span class="line">			if (r &lt;= rmax)</span><br><span class="line">			&#123;</span><br><span class="line">				float x = xc + r*cos(beta);</span><br><span class="line">				float y = yc + r*sin(beta);</span><br><span class="line">				mapx.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(x);</span><br><span class="line">				mapy.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(y);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				mapx.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(j);</span><br><span class="line">				mapy.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(i);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> //扭曲变换函数</span><br><span class="line">void WrapImage(Mat &amp;mapx, Mat &amp;mapy, int width, int height, int alpha)</span><br><span class="line">&#123;</span><br><span class="line">	//alpha:离中心定点越远扭曲程度越高</span><br><span class="line">	//图像绕(xc,yc)旋转,rmax扭曲范围</span><br><span class="line">	float xc = width / 2.0;</span><br><span class="line">	float yc = height / 2.0;</span><br><span class="line">	for (int i = 0; i &lt; width; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 0; j &lt; height; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			//改变map_x &amp; map_y的值.</span><br><span class="line"></span><br><span class="line">			float dx = i - xc;</span><br><span class="line">			float dy = j - yc;</span><br><span class="line">			float r = sqrt(dx*dx + dy*dy);</span><br><span class="line">			//double atan2(double y,double x) 返回的是原点至点(x,y)的方位角，即与 x 轴的夹角。</span><br><span class="line">			float theta = atan2(dx, dy);</span><br><span class="line">			float beta = theta + alpha*((rmax - r) / rmax);</span><br><span class="line">			if (r &lt;= rmax)</span><br><span class="line">			&#123;</span><br><span class="line">				float x = xc + r*cos(beta);</span><br><span class="line">				float y = yc + r*sin(beta);</span><br><span class="line">				mapx.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(x);</span><br><span class="line">				mapy.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(y);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				mapx.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(j);</span><br><span class="line">				mapy.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(i);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> （2）波动变换公式：</p>
 <p> 图像沿x和y方向产生一个局部波动，映射的参数为（非零）周期长度Lx,Ly以及相关联的振幅值Ax,Ay</p>
@@ -391,7 +391,7 @@
 <p> （3）球形变换公式：</p>
 <p> 当ρ值&lt;0时图像不是球形变换，当ρ值&gt;0时才是球形变换</p>
 <p> <img src="https://img-blog.csdnimg.cn/20190122103840603.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDE3MTgy,size_16,color_FFFFFF,t_70" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"> //球形变换函数</span><br><span class="line">void SphericalImage(Mat &amp;mapx, Mat &amp;mapy, int width, int height, float rho)</span><br><span class="line">&#123;</span><br><span class="line">	//定点(xc, yc), rmax变换范围</span><br><span class="line">	//要是中间是球形的话需要rho&gt;1</span><br><span class="line">	float xc = width / 2.0;</span><br><span class="line">	float yc = height / 2.0;</span><br><span class="line">	for (int i = 0; i &lt; width; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 0; j &lt; height; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			//改变map_x &amp; map_y的值. </span><br><span class="line"></span><br><span class="line">			float dx = i - xc;</span><br><span class="line">			float dy = j - yc;</span><br><span class="line">			float r = sqrt(dx*dx + dy*dy);</span><br><span class="line">			float z = sqrt(rmax*rmax - r*r);</span><br><span class="line">			float thetax = sqrt(dx*dx + z*z);</span><br><span class="line">			float thetay = sqrt(dy*dy + z*z);</span><br><span class="line">			float betax = (1 - (1.0 / rho))*asin(dx / (thetax));</span><br><span class="line">			float betay = (1 - (1.0 / rho))*asin(dy / (thetay));</span><br><span class="line">			if (r &lt;= rmax)</span><br><span class="line">			&#123;</span><br><span class="line">				float x = i - z*tan(betax);</span><br><span class="line">				float y = j - z*tan(betay);</span><br><span class="line">				mapx.at&lt;float&gt;(j, i) = static_cast&lt;float&gt;(x);</span><br><span class="line">				mapy.at&lt;float&gt;(j, i) = static_cast&lt;float&gt;(y);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				mapx.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(j);</span><br><span class="line">				mapy.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(i);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"> //球形变换函数</span><br><span class="line">void SphericalImage(Mat &amp;mapx, Mat &amp;mapy, int width, int height, float rho)</span><br><span class="line">&#123;</span><br><span class="line">	//定点(xc, yc), rmax变换范围</span><br><span class="line">	//要是中间是球形的话需要rho&gt;1</span><br><span class="line">	float xc = width / 2.0;</span><br><span class="line">	float yc = height / 2.0;</span><br><span class="line">	for (int i = 0; i &lt; width; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 0; j &lt; height; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			//改变map_x &amp; map_y的值.</span><br><span class="line"></span><br><span class="line">			float dx = i - xc;</span><br><span class="line">			float dy = j - yc;</span><br><span class="line">			float r = sqrt(dx*dx + dy*dy);</span><br><span class="line">			float z = sqrt(rmax*rmax - r*r);</span><br><span class="line">			float thetax = sqrt(dx*dx + z*z);</span><br><span class="line">			float thetay = sqrt(dy*dy + z*z);</span><br><span class="line">			float betax = (1 - (1.0 / rho))*asin(dx / (thetax));</span><br><span class="line">			float betay = (1 - (1.0 / rho))*asin(dy / (thetay));</span><br><span class="line">			if (r &lt;= rmax)</span><br><span class="line">			&#123;</span><br><span class="line">				float x = i - z*tan(betax);</span><br><span class="line">				float y = j - z*tan(betay);</span><br><span class="line">				mapx.at&lt;float&gt;(j, i) = static_cast&lt;float&gt;(x);</span><br><span class="line">				mapy.at&lt;float&gt;(j, i) = static_cast&lt;float&gt;(y);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				mapx.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(j);</span><br><span class="line">				mapy.at&lt;float&gt;(i, j) = static_cast&lt;float&gt;(i);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> 图像特效变换课程设计代码（带滚动条）下载地址：<a href="https://download.csdn.net/download/qq_42417182/10931603" target="_blank" rel="noopener">https://download.csdn.net/download/qq_42417182/10931603</a></p>
 
@@ -437,7 +437,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/CSDN迁移/" rel="tag"><i class="fa fa-tag"></i># CSDN迁移</a>
+              <a href="/tags/OpenCV/" rel="tag"><i class="fa fa-tag"></i># OpenCV</a>
             
           </div>
         
@@ -527,7 +527,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -560,7 +560,15 @@
         
           
         
-        <span class="site-state-item-count">9</span>
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -628,14 +636,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">131k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

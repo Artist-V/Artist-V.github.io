@@ -58,7 +58,7 @@
 </script>
 
   <meta name="description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89015735">
-<meta name="keywords" content="CSDN迁移">
+<meta name="keywords" content="Linux C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Linux C】九数组分数">
 <meta property="og:url" content="http://yoursite.com/2017/04/04/【Linux C】九数组分数/index.html">
@@ -66,7 +66,7 @@
 <meta property="og:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89015735">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190404115434189.png">
-<meta property="og:updated_time" content="2019-09-08T11:56:22.328Z">
+<meta property="og:updated_time" content="2019-09-10T05:03:47.356Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Linux C】九数组分数">
 <meta name="twitter:description" content="版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  本文链接：https://blog.csdn.net/qq_42417182/article/details/89015735">
@@ -189,7 +189,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">9</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">13</span></a>
 
   </li>
       
@@ -215,7 +215,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -311,7 +311,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-08 19:56:22" itemprop="dateModified" datetime="2019-09-08T19:56:22+08:00">2019-09-08</time>
+                <time title="修改时间：2019-09-10 13:03:47" itemprop="dateModified" datetime="2019-09-10T13:03:47+08:00">2019-09-10</time>
               </span>
             
           
@@ -366,7 +366,7 @@
 </blockquote>
 <p> 吃一堑长一智，上次那道蓝桥杯的题自我感觉很简单其实也是有很多坑</p>
 <p> 让我来瞧瞧他有什么厉害的地方 =-=</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void test(int x[])</span><br><span class="line">&#123;</span><br><span class="line">	int a = x[0] * 1000 + x[1] * 100 + x[2] * 10 + x[3];</span><br><span class="line">	int b = x[4] * 10000 + x[5] * 1000 + x[6] * 100 + x[7] * 10 + x[8];</span><br><span class="line"></span><br><span class="line">	if (a * 3 == b)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%d / %d\n&quot;, a, b);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void f(int x[], int k)</span><br><span class="line">&#123;</span><br><span class="line">	int i, t;</span><br><span class="line"></span><br><span class="line">	if (k &gt;= 9)</span><br><span class="line">	&#123;</span><br><span class="line">		test(x);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for (i = k; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;</span><br><span class="line">			t = x[k];</span><br><span class="line">			x[k] = x[i];</span><br><span class="line">			x[i] = t;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		f(x, k + 1);</span><br><span class="line">		</span><br><span class="line">		________________ // 填空处</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int x[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;</span><br><span class="line">	f(x, 0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">void test(int x[])</span><br><span class="line">&#123;</span><br><span class="line">	int a = x[0] * 1000 + x[1] * 100 + x[2] * 10 + x[3];</span><br><span class="line">	int b = x[4] * 10000 + x[5] * 1000 + x[6] * 100 + x[7] * 10 + x[8];</span><br><span class="line"></span><br><span class="line">	if (a * 3 == b)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%d / %d\n&quot;, a, b);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void f(int x[], int k)</span><br><span class="line">&#123;</span><br><span class="line">	int i, t;</span><br><span class="line"></span><br><span class="line">	if (k &gt;= 9)</span><br><span class="line">	&#123;</span><br><span class="line">		test(x);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for (i = k; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		&#123;</span><br><span class="line">			t = x[k];</span><br><span class="line">			x[k] = x[i];</span><br><span class="line">			x[i] = t;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		f(x, k + 1);</span><br><span class="line"></span><br><span class="line">		________________ // 填空处</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int x[] = &#123; 1, 2, 3, 4, 5, 6, 7, 8, 9 &#125;;</span><br><span class="line">	f(x, 0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> 运行发现注释掉填空行之后，程序没有输出，所以填空处应该是对输出结果很重要的一行代码</p>
 <p> 程序用递归方法去不断地进行“123456789”的排列</p>
@@ -426,7 +426,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/CSDN迁移/" rel="tag"><i class="fa fa-tag"></i># CSDN迁移</a>
+              <a href="/tags/Linux-C/" rel="tag"><i class="fa fa-tag"></i># Linux C</a>
             
           </div>
         
@@ -522,7 +522,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -555,7 +555,15 @@
         
           
         
-        <span class="site-state-item-count">9</span>
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -623,14 +631,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">131k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
